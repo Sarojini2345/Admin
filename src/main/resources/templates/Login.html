@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<link rel="stylesheet" href="Style.css">
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Include jQuery before your script -->
+
+</head>
+<body>
+   <!--   <div id="css">
+     <img id="add" src="https://www.ldtech.in/images/logo.png"></img>
+   </div>-->
+   <div class="login-container">
+        <h2>Login</h2>
+        <form  id="myForm">
+            <label for="emp_id">Employee ID:</label>
+            <input type="text" id="admin_id" name="admin_id" required />
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required />
+            
+            <button type="submit" value="Submit">Login</button>
+        </form>
+    </div>
+    <script>
+        $(document).ready(function(){
+        	
+          $("#myForm").submit(function(event){
+        	  event.preventDefault();
+  	        console.log("hi");
+  	        var formData = $(this).serialize();
+
+              // Send the form data using AJAX
+              $.ajax({
+                  type: "POST", // Change to "GET" if your server expects a GET request
+                  url: "/check", // Replace with the path to your server-side script
+                  data: formData,
+                  success: function(response) {
+                      // Handle the server response (success message, error message, etc.)
+                      var str="Login suceessfull !"
+                      console.log(response);
+                     
+                     if(response==str){
+                      alert(response);
+                     location.href="/getDashboard"
+                     }
+                     else{
+                    	 alert("please Enter correct credentials !");
+                     }
+                     // alert(response);
+                      // You can update the UI or show a message to the user based on the response
+                  },
+                  error: function(error) {
+                      console.error("Error submitting the form:", error);
+                  }
+        	  
+          });
+        		
+          });	
+        });
+    </script>
+</body>
+</html>
