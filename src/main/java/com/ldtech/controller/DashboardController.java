@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ldtech.entity.AdminLogin;
 import com.ldtech.entity.EmployeeAllocation;
-import com.ldtech.service.DashboardService;
+import com.ldtech.serviceImpl.DashboardService;
 
 @RestController
 public class DashboardController {
@@ -60,13 +60,13 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/searchAllByClient/{client}")
-	public ResponseEntity<List<EmployeeAllocation>> searchByClient(String str){
+	public ResponseEntity<List<EmployeeAllocation>> searchByClient(@PathVariable("client") String str){
 	     List<EmployeeAllocation> loc=service.searchByClient(str);
 		return ResponseEntity.ok(loc);
 	}
 	
 	@GetMapping("/searchAllByStatus/{status}")
-	public ResponseEntity<List<EmployeeAllocation>> searchByStatusid(String str){
+	public ResponseEntity<List<EmployeeAllocation>> searchByStatusid(@PathVariable("status")String str){
 	     List<EmployeeAllocation> loc=service.searchByStatus(str);
 		return ResponseEntity.ok(loc);
 	}

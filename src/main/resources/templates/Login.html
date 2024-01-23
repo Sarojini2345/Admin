@@ -3,7 +3,7 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
-<link rel="stylesheet" href="Style.css">
+<link rel="stylesheet" href="/css/Login.css">
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <!-- Include jQuery before your script -->
 
@@ -15,7 +15,7 @@
    <div class="login-container">
         <h2>Login</h2>
         <form  id="myForm">
-            <label for="emp_id">Employee ID:</label>
+            <label for="emp_id">Admin ID:</label>
             <input type="text" id="admin_id" name="admin_id" required />
             
             <label for="password">Password:</label>
@@ -44,7 +44,7 @@
                      
                      if(response==str){
                       alert(response);
-                     location.href="/getDashboard"
+                     location.href="/getHome"
                      }
                      else{
                     	 alert("please Enter correct credentials !");
@@ -54,8 +54,7 @@
                   },
                   error: function(error) {
                       console.error("Error submitting the form:", error);
-                  }
-        	  
+                  } 
           });
         		
           });	

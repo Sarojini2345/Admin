@@ -3,6 +3,7 @@ import java.util.List;
 
 import com.ldtech.entity.AdminLogin;
 import com.ldtech.entity.EmployeeAllocation;
+import com.ldtech.entity.ProjectEntity;
 
 public interface IDashboardService {
 	List<EmployeeAllocation> searchByEmployeeId(String employeeId);
