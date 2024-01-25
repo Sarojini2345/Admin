@@ -15,5 +15,14 @@ public class HomePageController {
 	@GetMapping("/countEmployee")
 	public Long getTotalEmployee() {
 		return service.CountTotalEmployee();
-	} 	
+	} 
+	
+	@GetMapping("/countAllocated")
+	public Long getAllocatedEmployee() {
+		return service.countAllocatedEmployee();	
+	}
+	@GetMapping("/countUnAllocated")
+	public Long getUnAllocatedEmployee() {
+		return service.countUnAllocatedEmployee();	
+	}
 }

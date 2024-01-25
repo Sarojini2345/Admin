@@ -3,9 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+
     height: 100vh;
     background-color: #f4f4f4;
 }
@@ -18,12 +16,14 @@ body {
     margin-top: 100px;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);     
+    align-items: center;   
 }
 
 form {
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 label {
@@ -34,12 +34,21 @@ input {
     padding: 8px;
     margin-bottom: 16px;
 }
-
+.home{      
+          margin-right:none;
+          margin-top:20px;
+          display: flex;
+          flex-direction: row;
+          padding:none;
+}
 button {
+	width: 100px; /* Set the desired width */
+    padding: 8px;
     padding: 10px;
     background-color: #3498db;
     color: #fff;
     border: none;
     border-radius: 3px;
     cursor: pointer;
+    align-items: center;
 }

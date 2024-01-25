@@ -13,25 +13,25 @@
 
 <body>
 	<div class="home">
-	 <img id="add" src="https://www.ldtech.in/images/logo.png"></img>
+	 <img id="add" src="Logo.png" alt="Logo"></img>
 	 <a href="/getHome"><button class="btn">Home</button></a>
 	</div>
 	<div class="container">
 	 
 		<p class="title">Employee Application</p>
-		<form>
+		<form id="myForm">
 			<div class="form-group">
 				<label for="employeeId">Employee Id:</label>
-                <input type="text" class="eidInput" id="employeeId" name="employeeId">
+                <input type="text" class="eidInput" id="employeeId" name="employeeId" required />
 			</div>
 			<div class="form-group">
 				<label for="employeeName">Employee Name:</label>
-				<input type="text" id="employeeName" name="employeeName">
+				<input type="text" id="employeeName" name="employeeName" required />
 			</div>
 
 			<div class="form-group">
 				<label for="department">Department:</label>
-				<input type="text" id="department" name="department">
+				<input type="text" id="department" name="department" required />
 			</div>
 			<div class="form-group">
 				<label for="project">Project:</label>
@@ -40,7 +40,7 @@
 			</div>
 			<div class="form-group">
 				<label for="projectAllocation">Project Allocation:</label>
-				<select id="projectAllocation" name="projectAllocation">
+				<select id="projectAllocation" name="project_type">
 					<option value="">Select Allocation</option>
 					<option value="">Billable</option>
 					<option value="">Non-Billable</option>
@@ -48,7 +48,7 @@
 			</div>
 			<div class="form-group">
 				<label for="client">Client:</label>
-				<input type="text" id="client" name="client">
+				<input type="text" id="client" name="client" >
 			</div>
 			<div class="form-group">
 				<label for="reportingManager">Reporting Manager:</label>
@@ -94,6 +94,6 @@
                 });
             })
             .catch(error => console.error('Error fetching dropdown options:', error));
-     </script>
+   </script>
 </body>
 </html>

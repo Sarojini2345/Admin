@@ -1,6 +1,7 @@
 package com.ldtech.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,13 +41,19 @@ public class EmployeeAllocationController {
 	        }
 	    }
 	  @PostMapping("/insertData")
-	    public String createEmployee(@RequestBody EmployeeAllocation employee){       
+	    public String createEmployee(@RequestBody EmployeeAllocation employee){ 
+		  
 		  ProjectEntity project=employee.getProject();
-		  ProjectEntity project1=repo.save(project);
-		  employee.setProject(project1);
-		  EmployeeAllocation emp1=repo1.save(employee);         
+		  ProjectEntity byProjectName = repo.findByProjectName(project.getProjectName());
+//		  ProjectEntity projectEntity = byId.get();
+		  
+		  
+//		  ProjectEntity project1=repo.save(project);
+		  employee.setProject(byProjectName);
+		  EmployeeAllocation emp1=repo1.save(employee);  
+		  System.out.println("hhii");
 	      return "Record with employeeId "+employee.getId()+"successfully saved";
-	    }
+	    }  
 	  
 	  @GetMapping("/getDropdown")
 	  public ResponseEntity<List<ProjectEntity>> findEmployeeDropDown(){

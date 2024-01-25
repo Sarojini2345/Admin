@@ -17,7 +17,16 @@ public class HomePageClass implements IHomePage {
 		// TODO Auto-generated method stub
 		return repo.count();
 	}
-    
-	
-	
+
+	@Override
+	public Long countAllocatedEmployee() {
+		// TODO Auto-generated method stub
+		return repo.findAllocatedEmployee();
+	}
+
+	@Override
+	public Long countUnAllocatedEmployee() {
+		// TODO Auto-generated method stub
+		return repo.findUnAllocatedEmployee();
+     }	
 }
