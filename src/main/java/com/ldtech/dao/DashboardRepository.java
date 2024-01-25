@@ -17,7 +17,7 @@ public interface DashboardRepository extends JpaRepository<EmployeeAllocation, L
 	List<EmployeeAllocation> findAllByProjectClient(String client);
 	List<EmployeeAllocation> findAllByProjectManager(String manager);
 	List<EmployeeAllocation> findAllByStatus(String status);
-	EmployeeAllocation findByEmployeeId(String employeeId);
+	EmployeeAllocation findByEmployeeName(String employeeName);
 	@Query(value="select count(*) from employee_allocation where status='active'",nativeQuery=true)
 	Long findAllocatedEmployee();
 	@Query(value="select count(*) from employee_allocation where status='inactive'",nativeQuery=true)

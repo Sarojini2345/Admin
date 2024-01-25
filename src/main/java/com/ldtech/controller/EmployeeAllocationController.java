@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.ldtech.dao.DashboardRepository;
 import com.ldtech.dao.ProjectRepo;
 import com.ldtech.entity.EmployeeAllocation;
+import com.ldtech.entity.EmployeeProfile;
 import com.ldtech.entity.ProjectEntity;
 import com.ldtech.service.IEmployeeAllocationPage;
 
@@ -31,30 +32,30 @@ public class EmployeeAllocationController {
 	 IEmployeeAllocationPage service;
 
 	  @GetMapping("/hello/{employeeId}")
-	    public ResponseEntity<EmployeeAllocation> getEmployeeById(@PathVariable String employeeId) {
+	    public ResponseEntity<EmployeeProfile> getEmployeeById(@PathVariable String employeeId) {
 	        System.out.println("EmployeeAllocationController.getEmployeeById()");
-	        EmployeeAllocation employee = this.service.findByEmployeeId(employeeId);
+	        EmployeeProfile employee = this.service.findByEmployeeId(employeeId);
 	        if (employee != null) {
 	            return ResponseEntity.ok(employee);
 	        } else {
 	            return ResponseEntity.notFound().build();
 	        }
 	    }
-	  @PostMapping("/insertData")
+	  @PostMapping(value="/insertData", consumes = "application/json")
 	    public String createEmployee(@RequestBody EmployeeAllocation employee){ 
 		  
-		  ProjectEntity project=employee.getProject();
+		   ProjectEntity project=employee.getProject();
+		  
 		  ProjectEntity byProjectName = repo.findByProjectName(project.getProjectName());
 //		  ProjectEntity projectEntity = byId.get();
 		  
 		  
 //		  ProjectEntity project1=repo.save(project);
 		  employee.setProject(byProjectName);
-		  EmployeeAllocation emp1=repo1.save(employee);  
+		  EmployeeAllocation emp1=repo1.save(employee); 		  
 		  System.out.println("hhii");
-	      return "Record with employeeId "+employee.getId()+"successfully saved";
+	      return "Record with employeeId "+employee.getId()+" successfully saved";
 	    }  
-	  
 	  @GetMapping("/getDropdown")
 	  public ResponseEntity<List<ProjectEntity>> findEmployeeDropDown(){
 		     List<ProjectEntity> loc=service.findProjectDetails();

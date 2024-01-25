@@ -26,14 +26,14 @@ $(document).ready(function() {
                 }
             });
                
-       $("#dropdown, #projectAllocation").on("change", function () {
+       $("#dropdown").on("change", function () {
         var selectedValue = $(this).val().trim();
         console.log("Selected Value: " + selectedValue);
         if (selectedValue !== '') {
             fetchDataBasedOnDropdown(selectedValue);
         }
     });
-    
+       
        function fetchDataBasedOnDropdown(selectedValue) {
         $.ajax({
             url: '/api/' + selectedValue, // Replace with the correct endpoint based on the selected dropdown
@@ -42,7 +42,12 @@ $(document).ready(function() {
                 if (data) {
                     console.log("Dropdown Data:", data);
                      $("#reportingManager").val(data.manager);
+                     $("#proj").val(data.project_type);
                      $("#client").val(data.client);
+                      $("#allocationStartDate").val(data.project_startdate);
+                      $("#allocationEndDate").val(data.project_enddate);
+                     console.log(data.project_type);
+                     
                     // Update the UI with the details from the dropdown data
                     // For example, if the data has a property 'projectName', you can do:
                     // $("#projectDetails").text("Project Details: " + data.projectName);
@@ -54,7 +59,5 @@ $(document).ready(function() {
                 alert("Error fetching data for the selected value");
             }
         });
-       }
-
-
+      }
         });
