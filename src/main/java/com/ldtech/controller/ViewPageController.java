@@ -15,7 +15,7 @@ public class ViewPageController {
 	}
 	
 	@GetMapping("/getHome")
-	public String getDashboard() {
+	public String getHome() {
 		return "Home_page";
 		
 	}
@@ -31,5 +31,33 @@ public class ViewPageController {
             // Return HTML page
             return "employee_allocation";
         }
+    }
+    
+    @GetMapping("/dashboard")
+    public String getDashboard() {
+		return "dashboard";
+    	
+    }
+    
+    @GetMapping("/projectMaster")
+    public String getProjectPage() {
+		return "ProjectMaster";
+    	
+    }
+
+    @GetMapping("/benchEmp")
+    public String getBenchEmployeePage() {
+		return "BenchEmp";
+    	
+    }
+    @GetMapping("/History")
+    public String getEmployeeHistory() {
+		return "Emphistory";
+    	
+    }
+    @GetMapping("/Timesheet")
+    public String getEmployeeTimesheet() {
+		return "Mytimesheet";
+    	
     }
 }

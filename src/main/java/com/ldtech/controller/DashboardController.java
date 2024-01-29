@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ldtech.entity.AdminLogin;
 import com.ldtech.entity.EmployeeAllocation;
+import com.ldtech.entity.EmployeeProfile;
 import com.ldtech.serviceImpl.DashboardService;
 
 @RestController
@@ -36,14 +37,24 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/searchAllById/{empId}")
-	public ResponseEntity<List<EmployeeAllocation>> searchById(@PathVariable("empId") String str){
-	     List<EmployeeAllocation> loc=service.searchByEmployeeId(str);
+	public ResponseEntity<List<EmployeeProfile>> searchById(@PathVariable("empId") String str){
+	     List<EmployeeProfile> loc=service.searchByEmployeeId(str);
 		return ResponseEntity.ok(loc);
 	}																	
-	
+	@GetMapping("/getAllocatedEmployee/{empId}")
+	public ResponseEntity<List<EmployeeAllocation>> searchByEmpId(@PathVariable("empId") String str){
+	     List<EmployeeAllocation> loc=service.searchByEmployeeIddetails(str);
+		return ResponseEntity.ok(loc);
+	}		
 	@GetMapping("/searchAllByName/{empName}")
-	public ResponseEntity<List<EmployeeAllocation>> searchByName(@PathVariable("empName") String str){
-	     List<EmployeeAllocation> loc=service.searchByEmployeeName(str);
+	public ResponseEntity<List<EmployeeProfile>> searchByName(@PathVariable("empName") String str){
+	     List<EmployeeProfile> loc=service.searchByEmployeeName(str);
+		return ResponseEntity.ok(loc);
+	}
+	
+	@GetMapping("/searchByNames/{empName}")
+	public ResponseEntity<List<EmployeeAllocation>> searchAllByName(@PathVariable("empName") String str){
+	     List<EmployeeAllocation> loc=service.searchByEmployeeNamedetails(str);
 		return ResponseEntity.ok(loc);
 	}
 	
@@ -52,10 +63,9 @@ public class DashboardController {
 	     List<EmployeeAllocation> loc=service.searchByManager(str);
 		return ResponseEntity.ok(loc);
 	}
-	
 	@GetMapping("/searchAllByDept/{dept}")
-	public ResponseEntity<List<EmployeeAllocation>> searchByDepartment(@PathVariable("dept") String str){
-	     List<EmployeeAllocation> loc=service.searchByDepartment(str);
+	public ResponseEntity<List<EmployeeProfile>> searchByDepartment(@PathVariable("dept") String str){
+	     List<EmployeeProfile> loc=service.searchByDepartment(str);
 		return ResponseEntity.ok(loc);
 	}
 	
@@ -66,8 +76,8 @@ public class DashboardController {
 	}
 	
 	@GetMapping("/searchAllByStatus/{status}")
-	public ResponseEntity<List<EmployeeAllocation>> searchByStatusid(@PathVariable("status")String str){
-	     List<EmployeeAllocation> loc=service.searchByStatus(str);
+	public ResponseEntity<List<EmployeeProfile>> searchByStatusid(@PathVariable("status")String str){
+	     List<EmployeeProfile> loc=service.searchByStatus(str);
 		return ResponseEntity.ok(loc);
 	}
 }

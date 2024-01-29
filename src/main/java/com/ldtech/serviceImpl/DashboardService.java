@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ldtech.dao.DashboardRepository;
+import com.ldtech.dao.EmployeeProfileRepo;
 import com.ldtech.dao.LoginRepo;
 import com.ldtech.dao.ProjectRepo;
 import com.ldtech.entity.AdminLogin;
 import com.ldtech.entity.EmployeeAllocation;
+import com.ldtech.entity.EmployeeProfile;
 import com.ldtech.entity.ProjectEntity;
 import com.ldtech.service.IDashboardService;
 
@@ -24,26 +26,48 @@ public class DashboardService implements IDashboardService{
 	
 	@Autowired
 	ProjectRepo repo3;
+	
+	@Autowired
+	EmployeeProfileRepo repo1;
 
 	@Override
-	public List<EmployeeAllocation> searchByEmployeeId(String employeeId) {
+	public List<EmployeeProfile> searchByEmployeeId(String employeeId) {
 		// TODO Auto-generated method stub
 		
+//		List<EmployeeProfile> pf= repo1.findByEmployeeIdLike(employeeId);
+//		for(EmployeeProfile epf:pf) {
+//			String str=epf.getProject();
+//			if(str.equals("Allocated")) {
+//				return repo.findByEmployeeId(employeeId);
+//				//return null ;
+//			}
+//			else {
+//				return repo1.findByEmployeeIdLike(employeeId);
+//			}
+//		}
+		return repo1.findByEmployeeIdLike(employeeId);
+	}
+	
+	public List<EmployeeAllocation> searchByEmployeeIddetails(String employeeId) {
 		return repo.findByEmployeeIdLike(employeeId);
 	}
-
-	@Override
-	public List<EmployeeAllocation> searchByEmployeeName(String employeeName) {
-		// TODO Auto-generated method stub
-		
+	
+	public List<EmployeeAllocation> searchByEmployeeNamedetails(String employeeName) {
 		return repo.findAllByEmployeeName(employeeName);
 	}
 	
 	@Override
-	public List<EmployeeAllocation> searchByDepartment(String department) {
+	public List<EmployeeProfile> searchByEmployeeName(String employeeName) {
 		// TODO Auto-generated method stub
 		
-		return repo.findAllByDepartment(department);
+		return repo1.findAllByEmployeeName(employeeName);
+	}
+	
+	@Override
+	public List<EmployeeProfile> searchByDepartment(String department) {
+		// TODO Auto-generated method stub
+		
+		return repo1.findAllByDepartment(department);
 	}
 //
 	@Override
@@ -74,10 +98,10 @@ public class DashboardService implements IDashboardService{
 	}
 	
 	@Override
-	public List<EmployeeAllocation> searchByStatus(String status) {
+	public List<EmployeeProfile> searchByStatus(String status) {
 		// TODO Auto-generated method stub
 		
-		return repo.findAllByStatus(status);
+		return repo1.findAllByStatus(status);
 	}
 
 	@Override

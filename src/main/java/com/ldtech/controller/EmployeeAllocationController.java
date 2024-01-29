@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ldtech.dao.DashboardRepository;
+import com.ldtech.dao.EmployeeProfileRepo;
 import com.ldtech.dao.ProjectRepo;
 import com.ldtech.entity.EmployeeAllocation;
 import com.ldtech.entity.EmployeeProfile;
@@ -27,6 +28,9 @@ public class EmployeeAllocationController {
 	
 	@Autowired
 	DashboardRepository repo1;
+	
+	@Autowired
+	EmployeeProfileRepo repository;
 	
 	@Autowired
 	 IEmployeeAllocationPage service;
@@ -44,6 +48,10 @@ public class EmployeeAllocationController {
 	  @PostMapping(value="/insertData", consumes = "application/json")
 	    public String createEmployee(@RequestBody EmployeeAllocation employee){ 
 		  
+		  EmployeeAllocation emp=repo1.findByEmployeeId(employee.getEmployeeId());
+		  EmployeeProfile empl=repository.findByEmployeeId(employee.getEmployeeId());
+		   System.out.println(emp);
+		  
 		   ProjectEntity project=employee.getProject();
 		  
 		  ProjectEntity byProjectName = repo.findByProjectName(project.getProjectName());
@@ -51,10 +59,19 @@ public class EmployeeAllocationController {
 		  
 		  
 //		  ProjectEntity project1=repo.save(project);
+		  if(emp==null) {
 		  employee.setProject(byProjectName);
-		  EmployeeAllocation emp1=repo1.save(employee); 		  
-		  System.out.println("hhii");
-	      return "Record with employeeId "+employee.getId()+" successfully saved";
+		  EmployeeAllocation emp1=repo1.save(employee); 
+		  empl.setProject("Allocated");
+		  repository.save(empl);
+		  return "Record with employeeId "+emp1.getEmployeeId()+" successfully saved";
+		  } 
+		   else {
+		        emp.setProject(byProjectName);
+		        EmployeeAllocation emp2=repo1.save(emp);
+		        return "Record with employeeId "+emp2.getEmployeeId()+" successfully updated";
+		   }
+		  
 	    }  
 	  @GetMapping("/getDropdown")
 	  public ResponseEntity<List<ProjectEntity>> findEmployeeDropDown(){
@@ -66,8 +83,7 @@ public class EmployeeAllocationController {
 	  
 	  @GetMapping("/api/{projname}")
 	  public ProjectEntity findByProjectName(@PathVariable("projname") String projectName) {
-		return service.findProjectName(projectName);
-		  
+		return service.findProjectName(projectName);		  
 	  }
 	  
 }
