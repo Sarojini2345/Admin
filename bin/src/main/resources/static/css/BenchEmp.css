@@ -1,0 +1,207 @@
+@charset "ISO-8859-1";
+body{
+    background-color: #f2f2f2;
+    border: 100px;
+    border-radius: 100px black;
+}
+img{
+    width: 200px;
+    margin-bottom: 10px;
+}
+h2{
+    margin-top: 40px;
+    margin-bottom: 30px;
+    margin-left: 30px;
+    color: #e91000;
+}
+  .search-field {
+    margin-bottom: 15px;
+    margin-left: 100px;
+   
+  }
+ 
+  .label-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+ 
+  label {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+ 
+  .input-container {
+    position: relative;
+  }
+ 
+  input,
+  select {
+    padding: 10px;
+    margin-bottom: 1px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: calc(100% - 20px);
+  }
+ 
+  .search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #555;
+  }
+
+  .home-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: #333;
+    text-decoration: none;
+}
+
+.home-button i {
+    display: block;
+}
+ 
+  .button-container {
+    grid-column: span 4;
+    position: relative;
+  }
+ 
+ 
+.navigation {
+    margin-bottom: 20px;
+    color: #0e0d0d;
+}
+ 
+.navigation button {
+    width: 100px;
+    padding: 15px 20px;
+    cursor: pointer;
+    color: #0e0d0d;
+    color: black;
+    margin-left: 300px;
+    margin-top: 20px;
+}
+ 
+ 
+.navigation button:hover {
+    background-color: #167124;
+}
+ 
+ 
+  .logo {
+    max-width: 100px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ccc;
+  }
+ 
+ 
+ 
+  .result-box {
+    display: flex;
+    flex-direction: row; /* Set the flex direction to row */
+  }
+ 
+  .search-result {
+    display: flex;
+    flex-wrap: nowrap; /* Ensure that flex items do not wrap to the next line */
+  }
+ 
+  .search-result p {
+    margin-right: 20px; /* Add some space between the paragraphs if needed */
+    white-space: nowrap; /* Prevent text from wrapping to the next line */
+  }
+ 
+ 
+ 
+  .form-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(00px, 1fr));
+    gap: 20px;
+  }
+ 
+  /* Style the table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1px;
+}
+ 
+/* Style the table header */
+thead {
+    background-color: #eeeeee;
+    color: #050505;
+}
+ 
+th, td {
+    border: 2px solid rgb(87, 87, 87);
+    padding: 2px;
+    text-align: left;
+}
+ 
+ 
+th {
+    background-color: #ffffff;
+    color: #010101;
+}
+ 
+/* Style the table rows */
+tr {
+    transition: background-color 0.3s;
+}
+ 
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+ 
+/* Style the input elements inside the table */
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+ 
+/* Style the action buttons inside the table */
+.action {
+  display: flex;
+}
+ 
+.edit-button,
+.delete-button {
+  padding: 8px;
+  margin-right: 5px;
+  cursor: pointer;
+  border: none;
+  background-color: #ffffff;
+  color: rgb(30, 26, 26);
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+ 
+.edit-button:hover,
+.delete-button:hover {
+  background-color: #45a049;
+}
+
+/* Your existing CSS styles */
+
+.search-field {
+    position: relative;
+}
+
+.search-icon {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: #888; /* Adjust the color as needed */
+    cursor: pointer;
+}
+
+/* Add more styles as needed */

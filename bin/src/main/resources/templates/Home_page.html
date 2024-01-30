@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Side Navbar Example</title>
+    <style>
+       body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Common Styles */
+        a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        /* Dashboard Container */
+        .dashboard-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        /* Sidebar */
+        .sidebar-container {
+            background-color: #f0f2f5;
+            width: 20%;
+            /* Adjusted width to 100% for responsiveness */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        /* Logo Container */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        /* Logo */
+        .logo {
+            width: 100%;
+            /* Adjusted width to 100% for responsiveness */
+            max-width: 200px;
+            /* Added max-width for flexibility */
+            height: auto;
+            /* Allowing the height to adjust proportionally */
+            margin-right: 10px;
+        }
+
+        /* Menu Container */
+        .menu-container {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+
+        /* Menu Item */
+        .menu-item {
+            margin-bottom: 10px;
+        }
+
+        /* Menu Link */
+        .menu-link {
+            display: flex;
+            align-items: center;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .menu-link:hover {
+            background-color: #e0e4e8;
+        }
+
+        /* Menu Icon */
+        .menu-icon {
+            margin-right: 10px;
+        }
+
+        /* Status Container */
+
+        .status-container {
+
+            width: 100%;
+            height: 25%;
+            /* Adjusted width to 60% */
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            /* Changed to column for stacking */
+            position: fixed;
+            top: 15%;
+            left: 22%;
+            /* Added left value to push it to the right of the sidebar */
+            padding: 10px;
+            z-index: 1000;
+            box-sizing: border-box;
+        }
+
+
+        /* Status Box */
+        .status-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-left: 15px;
+            width: 24%;
+            height: 100%;
+            /* Adjusted width to 100% for responsiveness */
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            justify-content: center;
+            /* Added margin for spacing */
+        }
+
+
+
+        /* Sign Out Button */
+        .sign-out-button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Status Title */
+        .status-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        /* Status Count */
+        .status-count {
+            font-size: 20px;
+        }
+
+        .pending-div {
+            position: absolute;
+            top: 10%;
+            left: 30%;
+            transform: translate(-20%, -20%);
+            text-align: center;
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            padding-left: 20px;
+            width: 30%;
+            height: 5.5%;
+            background-color: rgb(255, 255, 0);
+        }
+
+
+        /* Footer */
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: auto;
+            margin-top: 20px;
+        }
+
+        .sign-out-button {
+            background-color: #333;
+            color: #fff;
+            padding: 10px 45px;
+            /* Adjusted padding to make it responsive */
+            min-width: 95px;
+            /* Added min-width to ensure it doesn't collapse completely */
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            /* Add styles specific to larger screens if needed */
+        }
+    </style>
+</head>
+<body> <div class="dashboard-container">
+
+        <div class="sidebar-container">
+            <div class="logo-container">
+                <img src="https://www.ldtech.in/images/logo.png" alt="logo" class="logo">
+            </div>
+            <ul class="menu-container">
+                <li class="menu-item">
+                    <a href="/dashboard" class="menu-link">
+                        Dashboard
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/projectMaster" class="menu-link">
+                        Project Master
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/hello" class="menu-link">
+                        Employee Allocation
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/benchEmp" class="menu-link">
+                        Bench Employees
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/history" class="menu-link">
+
+                        History
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="/timesheet" class="menu-link">
+
+                        Timesheet
+                    </a>
+                </li>
+            </ul>
+            <div class="footer-container">
+                <a href="/getPage">
+                    <button class="sign-out-button">Sign Out</button>
+                </a>
+            </div>
+        </div>
+
+        <div class="pending-div">
+            <span class="pending">No pending task</span>
+        </div>
+
+        <div class="status-container">
+
+            <div class="status-box" style="background-color: #ffa766;">
+                <p id="one"></p>
+                <span class="status-count">Total no. of Employees</span>
+            </div>
+
+            <div class="status-box" style="background-color: #ff6666;">
+                <p id="two"></p>
+                <span class="status-count">Unallocated Employee</span>
+            </div>
+
+            <div class="status-box" style="background-color: #1aff9a;">
+                <p id="three"></p>
+                <span class="status-count">Allocated Employee</span>
+            </div>
+        </div>
+
+    </div>
+   <script>
+        // Fetch total number of employees from the API
+        fetch('/countEmployee') // Replace with your actual API endpoint
+            .then(response => response.json())
+            .then(data => {
+                // Update the content of the 'Total no. of Employees' element
+                document.getElementById('one').innerText += `  ${data}`;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+    <script>
+        // Fetch total number of employees from the API
+        fetch('/countAllocated') // Replace with your actual API endpoint
+            .then(response => response.json())
+            .then(data => {
+                // Update the content of the 'Total no. of Employees' element
+                document.getElementById('three').innerText += `  ${data}`;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+      <script>
+        // Fetch total number of employees from the API
+        fetch('/countUnAllocated') // Replace with your actual API endpoint
+            .then(response => response.json())
+            .then(data => {
+                // Update the content of the 'Total no. of Employees' element
+                document.getElementById('two').innerText += `  ${data}`;
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    </script>
+</body>
+</html>
