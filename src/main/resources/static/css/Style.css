@@ -52,6 +52,7 @@ select {
 
 .navigation button {
   width: 100px;
+  height:40px;
   cursor: pointer;
   color: black;
   margin-left: 306px;

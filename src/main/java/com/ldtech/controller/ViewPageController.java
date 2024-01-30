@@ -50,9 +50,9 @@ public class ViewPageController {
 		return "BenchEmp";
     	
     }
-    @GetMapping("/History")
+    @GetMapping("/history")
     public String getEmployeeHistory() {
-		return "Emphistory";
+		return "History";
     	
     }
     @GetMapping("/Timesheet")

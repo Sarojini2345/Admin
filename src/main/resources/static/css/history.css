@@ -1,0 +1,89 @@
+@charset "ISO-8859-1";
+.headerlogo {
+    height: 26px;
+    width: 126px;
+}
+
+#header-text {
+    color: red;
+}
+
+.table {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: 79%;
+    gap: 163px;
+}
+
+.table_headings {
+    color: rgb(14, 1, 1);
+    padding: 5px 19px;
+}
+
+.column_heading {
+    color: rgb(8, 1, 1);
+    padding: 5px 21px;
+}
+
+.backbutton {
+    float: right;
+    margin: 10px 21px;
+
+}
+
+.input {
+    width: 100%;
+    margin-top: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+* {
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+
+form.example button:hover {
+    background: #0b7dda;
+}
+
+/* Clear floats */
+form.example::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.abc {
+
+    padding-left: 30px;
+}
+
+.fa fa-search {
+    margin-top: 50px;
+}
+
+#value1 {
+    height: 10px;
+    width: 10px;
+}
+
+.example {
+    width: 291px;
+    height: 19px;
+}
+.backbutton
+{
+    background-color: rgba(255, 0, 0, 0.781);
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+    height: 24px;
+    width: 60px;
+}
+.marginset
+{
+    padding: 4px 20px;
+    margin: 13px;
+}
