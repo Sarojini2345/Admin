@@ -68,6 +68,12 @@ public class DashboardController {
 	     List<EmployeeProfile> loc=service.searchByDepartment(str);
 		return ResponseEntity.ok(loc);
 	}
+	@GetMapping("/searchAllByDepts/{dept}")
+	public ResponseEntity<List<EmployeeAllocation>> searchAllByDepartment(@PathVariable("dept") String str){
+	     List<EmployeeAllocation> loc=service.searchAllByDepartment(str);
+		return ResponseEntity.ok(loc);
+	}
+	
 	
 	@GetMapping("/searchAllByClient/{client}")
 	public ResponseEntity<List<EmployeeAllocation>> searchByClient(@PathVariable("client") String str){

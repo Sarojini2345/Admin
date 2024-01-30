@@ -1,7 +1,7 @@
 $(document).ready(function() {
-    $('.search-icon').click(function() {
+    $('#search-icon1').click(function() {
         var empId = $('input[name="empId"]').val();
-        var empName = $('input[name="empName"]').val();
+       
 
         // Make an API request with the empId
         $.ajax({
@@ -16,6 +16,7 @@ $(document).ready(function() {
                         success: function(allocatedProjectData) {
                             console.log('Allocated Project Details:', allocatedProjectData);
                             updateTable(allocatedProjectData);
+                            //location.reload();
                         },
                         error: function(error) {
                             console.error('Error fetching allocated project details:', error);
@@ -23,6 +24,7 @@ $(document).ready(function() {
                     });
                 } else {
                     updateTable(data);
+                   // location.reload();
                 }
                });
             },
@@ -31,8 +33,12 @@ $(document).ready(function() {
             }
         });
 
-        // Make an API request with the empName
-        $.ajax({
+       
+    });
+     // Make an API request with the empName
+    $('#search-icon3').click(function() {
+		 var empName = $('input[name="empName"]').val();
+		$.ajax({
             url: '/searchAllByName/' + empName,
             method: 'GET',
             success: function(data) {
@@ -44,6 +50,7 @@ $(document).ready(function() {
                         success: function(allocatedProjectData) {
                             console.log('Allocated Project Details:', allocatedProjectData);
                             updateTable(allocatedProjectData);
+                             //updateTable(data);
                         },
                         error: function(error) {
                             console.error('Error fetching allocated project details:', error);
@@ -57,9 +64,64 @@ $(document).ready(function() {
             error: function(error) {
                 console.error('Error fetching data from API:', error);
             }
-        });
-    });
-
+        });		
+	});
+	$('#search-icon2').click(function() {
+		 var department = $('input[name="dept"]').val();
+		$.ajax({
+            url: '/searchAllByDept/' + department,
+            method: 'GET',
+            success: function(data) {
+                $.each(data, function(index, item) {
+                    if (item.project === 'Allocated') {
+                    $.ajax({
+                        url: '/searchAllByDepts/' + department,
+                        method: 'GET',
+                        success: function(allocatedProjectData) {
+                            console.log('Allocated Project Details:', allocatedProjectData);
+                            updateTable(allocatedProjectData);
+                             //updateTable(data);
+                        },
+                        error: function(error) {
+                            console.error('Error fetching allocated project details:', error);
+                        }
+                    });
+                } else {
+                    updateTable(data);
+                }
+               });
+            },
+            error: function(error) {
+                console.error('Error fetching data from API:', error);
+            }
+        });		
+	});
+	 $('#search-icon4').click(function() {
+		 var manager = $('input[name="manager"]').val();
+		$.ajax({
+            url: '/searchAllByManager/' + manager,
+            method: 'GET',
+            success: function(data) {
+				updateTable(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data from API:', error);
+            }
+        });		
+	});
+	 $('#search-icon5').click(function() {
+		 var client = $('input[name="client"]').val();
+		$.ajax({
+            url: '/searchAllByClient/' + client,
+            method: 'GET',
+            success: function(data) {
+				updateTable(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data from API:', error);
+            }
+        });		
+	});
     function updateTable(data) {
         var tableBody = $('#data-table tbody');
         tableBody.empty();
@@ -78,8 +140,7 @@ $(document).ready(function() {
                 '<td>' + row.project.project_startdate + '</td>' +
                 '<td>' + row.project.project_enddate + '</td>' +
                 '</tr>';
-
             tableBody.append(tableRow);
-        });
+      });
     }
 });

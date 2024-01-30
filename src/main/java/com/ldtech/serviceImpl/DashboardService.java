@@ -70,6 +70,11 @@ public class DashboardService implements IDashboardService{
 		return repo1.findAllByDepartment(department);
 	}
 //
+	public List<EmployeeAllocation> searchAllByDepartment(String department) {
+		// TODO Auto-generated method stub
+		
+		return repo.findAllByDepartment(department);
+	}
 	@Override
 	public List<EmployeeAllocation> searchByClient(String client) {
 		// TODO Auto-generated method stub

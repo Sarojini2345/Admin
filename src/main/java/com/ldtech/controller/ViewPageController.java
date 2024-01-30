@@ -50,9 +50,7 @@ public class ViewPageController {
 		return "BenchEmp";
     	
     }
-<<<<<<< HEAD
-    @GetMapping("/history")
-=======
+
     /* 
     @GetMapping("/History")
 >>>>>>> c9664cfe6df1ae388fe9fe2fe7044e5e792267aa
