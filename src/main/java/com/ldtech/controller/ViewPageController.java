@@ -50,14 +50,22 @@ public class ViewPageController {
 		return "BenchEmp";
     	
     }
+    /* 
     @GetMapping("/History")
     public String getEmployeeHistory() {
 		return "Emphistory";
     	
-    }
+    } 
+    */
     @GetMapping("/Timesheet")
     public String getEmployeeTimesheet() {
 		return "Mytimesheet";
-    	
     }
+    
+    //History Page Controller
+    @GetMapping("/history")
+    public String getHistory() {
+		return "History";
+    }
+    
 }
