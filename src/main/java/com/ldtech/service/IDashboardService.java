@@ -12,6 +12,6 @@ public interface IDashboardService {
 	List<EmployeeProfile> searchByDepartment(String department);
 	List<EmployeeAllocation> searchByClient(String client);
 	List<EmployeeAllocation> searchByManager(String manager);
-	List<EmployeeProfile> searchByStatus(String status);
+	List<EmployeeAllocation> searchByStatus(String status);
 	AdminLogin checkCredentials(String admin_id, String password);
 }

@@ -10,21 +10,56 @@
 </head>
 <body>
 
-    <div class="home">
-	 <img id="add" src="https://www.ldtech.in/images/logo.png"></img>
-     </div>
-   <div class="login-container">
-        <h2>Login</h2>
-        <form  id="myForm">
-            <label for="emp_id">Admin ID:</label>
-            <input type="text" id="admin_id" name="admin_id" required />
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required />
-            
-            <button type="submit" value="Submit">Login</button>
+    <center>
+        <!-- Banner Start -->
+        <div id="banner">
+            <h2 id="title">
+                LDTECH
+            </h2>
+            <h5 id="subtitle">
+                Innovate. Transform. Thrive.
+            </h5>
+        </div>
+        <!-- Banner End -->
+        <!-- Body Start -->
+        <h1 id="bodymessage1">
+            Log In
+        </h1>
+        <div id="line">
+        </div>
+        <form id="myForm">
+        <input id="username"  name="admin_id" type="text" placeholder="Enter your username" required/>
+        <br>
+        <br>
+        <input id="password" type="password"  name="password" placeholder="Enter your password" required />
+        <br>
+        <a href="#" onclick="forgotPassword()" id="forgetyourpassword">
+            Forgot your password?
+        </a>
+        <br>
+        <br>
+        <button id="loginbutton" type="submit">
+            Log In
+        </button>
+        
         </form>
-    </div>
+        <!-- Banner End -->
+        <!-- Footer Start -->
+        <div id="footer">
+            <h4 id="footertitle">
+                LDTECH ©
+            </h4>
+            <h4 id="footercontent">
+                Expert Our belief is that if you get the CULTURE right , Most of the other stuff will happen on it's own
+                <br>
+                 Contact us at www.ldtech.in or call +91-9938509222 or 
+                 DCB 207 & 208-DLF Cybercity, Bhubaneswar , Odisha, 751024 
+                <!-- <br>
+                Founded in 2016 -->
+            </h4> 
+        </div>
+        <!-- Footer End -->
+    </center>
  
     <script>
         $(document).ready(function(){
@@ -37,7 +72,7 @@
               // Send the form data using AJAX
               $.ajax({
                   type: "POST", // Change to "GET" if your server expects a GET request
-                  url: "/check", // Replace with the path to your server-side script
+                  url: "http://localhost:8080/check", // Replace with the path to your server-side script
                   data: formData,
                   success: function(response) {
                       // Handle the server response (success message, error message, etc.)
@@ -61,6 +96,22 @@
         		
           });	
         });
+        
+        function forgotPassword() {
+            var email = prompt("Enter your email:");
+ 
+            // Make a POST request to the forgot-password endpoint
+            fetch('http://localhost:8080/forgot-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `email=${email}`
+            })
+            .then(response => response.text())
+            .then(data => alert(data))
+            .catch(error => console.error('Error:', error));
+        }
     </script>
 </body>
 </html>

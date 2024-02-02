@@ -1,54 +1,141 @@
-@charset "ISO-8859-1";
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
 
-    height: 100vh;
-    background-color: #f4f4f4;
-}
-
-.login-container {
-    background-color: rgb(192, 192, 192);
-    width: 300px; /* Set the desired width */
-    height: 300px; /* Set the desired height */
-    margin: auto; /* Center the login container horizontally */
-    margin-top: 100px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);     
-    align-items: center;   
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-label {
-    margin-bottom: 8px;
-}
-
-input {
-    padding: 8px;
-    margin-bottom: 16px;
-}
-.home{      
-          margin-right:none;
-          margin-top:20px;
-          display: flex;
-          flex-direction: row;
-          padding:none;
-}
-button {
-	width: 100px; /* Set the desired width */
-    padding: 8px;
-    padding: 10px;
-    background-color: #3498db;
-    color: #fff;
+  @import url('https://fonts.google.com/specimen/Roboto');
+  @import url('https://fonts.googleapis.com/css?family=Raleway');
+ 
+  #banner {
+    background: linear-gradient(to left, #ECE9E6, #FFFFFF);
+    margin-top: -2.5em;
+    margin-left: -0.46875em;
+    height: 3.125em;
+    width: 101.001%;
+    border-radius: 35px;
+    color: #fe8c00;
+    font-family: Raleway;
+    font-size: 32px;
+    padding-top: 2.1875em;
+    position: fixed;
+    opacity: 0.92;
+    z-index: 1;
+  }
+ 
+ #title {
+   font-family: Poiret One;
+   font-size: 45.5px;
+   margin-top: 0em;
+ }
+  
+  #subtitle {
+    font-family: Poiret One;
+    font-size: 18px;
+    color: #3c352d;
+    margin-top: -1.75em;
+  }
+ 
+  body {
+    background: linear-gradient(to left, #665540, #3a352c);
+  }
+  
+  #bodymessage1 {
+    font-size: 45px;
+    padding-top: 3.111em;
+    font-family: Roboto;
+    color: white;
+  }
+  
+  #line {
+    width: 22em;
+    height: 0.15em;
+    margin-top: -1em;
+    margin-bottom: 0.9em;
+    background-color: white;
+    border-radius: 50px;
+  }
+  
+  input {
+    font-size: 15px;
+    width: 11.667em;
+    height: 1.667em;
+    font-family: Raleway;
     border: none;
-    border-radius: 3px;
+    padding: 0.533em;
+    border-radius: 6px;
+  }
+  
+  #forgetyourpassword {
+    font-size: 16px;
+    color: white;
+    font-family: Raleway;
+    margin-top: 0.688em;
+    margin-bottom: 0.625em;
+    width: 12.5em;
+    border-radius: 6px;
+    padding: 0.438em;
+    transition: background .5s;
+    -webkit-transition: background .5s;
+  }
+  
+  #forgetyourpassword:hover {
+    transition: opacity 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    transition: all ease 0.5s;
     cursor: pointer;
-    align-items: center;
-}
+    background-color: #b36200;
+  }
+  
+  #loginbutton {
+    font-size: 15px;
+    width: 12.667em;
+    height: 1.667em;
+    background-color: #b32700;
+    border: none;
+    color: white;
+    margin-bottom: 2.333em;
+    font-family: Raleway;
+    font-weight: bold;
+    padding-bottom: 1.667em;
+    padding-top: 0.267em;
+    border-radius: 6px;
+    transition: background .5s;
+    -webkit-transition: background .5s;
+  }
+  
+  #loginbutton:hover {
+    transition: opacity 0.5s;
+    -webkit-transition: all ease 0.5s;
+    -moz-transition: all ease 0.5s;
+    -o-transition: all ease 0.5s;
+    -ms-transition: all ease 0.5s;
+    transition: all ease 0.5s;
+    cursor: pointer;
+    background-color: #661600;
+  }
+
+  
+  #footer {
+    background-color: #e9ecef;
+    color: #495057;
+    width: 100%;
+    font-size: 21.5px;
+    height: 8.55813953488372em;
+    margin-left: -0.39em;
+    padding-top: 0.3488372093023256em;
+    margin-top: 6em;
+    opacity: 0.92;
+    position: absolute;
+    border-radius: 15px 15px 0px 0px;
+  }
+  
+  #footertitle,
+  #footercontent {
+    text-align: left;
+    margin-left: 6.976744186046512em;
+    font-family: Raleway;
+  }
+  
+  #footercontent {
+    margin-top: -0.46511627906976744em;
+  }
+ 

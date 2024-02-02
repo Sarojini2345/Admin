@@ -61,7 +61,7 @@ public class ViewPageController {
     */
     @GetMapping("/Timesheet")
     public String getEmployeeTimesheet() {
-		return "Mytimesheet";
+		return "Timesheet";
     }
     
     //History Page Controller
@@ -69,5 +69,4 @@ public class ViewPageController {
     public String getHistory() {
 		return "History";
     }
-    
 }

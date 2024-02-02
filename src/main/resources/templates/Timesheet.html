@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Dashboard</title>
+    <link rel="stylesheet" type="text/css" href="/css/Timesheet.css">
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header style="display: flex; justify-content: space-between; align-items: center; padding: 20px; text-align:center; background-color: #ffffff; color: #fff;">
+        <img src="logo1.jpg" alt="Company Logo" style="width: 110px; height: 35px;border-radius: 10%;">
+        <a href="/getHome" style="text-decoration: none; color: white;background-color: #b3a6ec; color: #000;width: 100px; height: 30px;">Home</a>
+    </header>
+
+    <!-- Employee Dashboard Section -->
+    <section style="padding: 20px; display: flex; align-items: flex-start;">
+
+        <!-- Employee Dashboard Info (Left) -->
+        <div style="width: 30%;">
+            <h2 style="color: red;">Employee Dashboard</h2>
+            <p>Employee Name: Raghav </p> 
+            <p>Role: Developer</p>
+            <p>Project: Project X</p>
+            <p>Reporting Manager: Kishan</p>
+        </div>
+
+        <!-- Calendar and Status Info (Right) -->
+        <div style="width: 20%; margin-left: auto;">
+            <!-- Calendar for Week Start Date -->
+            <label for="weekStartDate">Week Start Date:</label>
+            <input type="date" id="weekStartDate" name="weekStartDate" style="color: #310803;">
+
+            <label for="weekEndDate">Week End Date:</label>
+            <input type="date" id="weekEndDate" name="weekEndDate" style="color: #310803; margin-top: 10px; margin-left: 5px;">
+            <div><br></div>
+            <div>Timesheet Approval Status: <input type="text" id="timesheetStatus"></div>
+        </div>
+    </section>
+
+    <hr style="width: 100%; height:20% black; margin: 10px 10px;">
+
+    <!-- Fetched Data Table Section -->
+    <section >
+
+        <!-- Table Structure -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Login</th>
+                    <th>Logout</th>
+                    <th>Project</th>
+                    <th>Client</th>
+                    <th>Activity Hour</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Add fetched data rows dynamically here -->
+                <tr>
+                    <td>25-01-2024</td>
+                    <td>09:00 AM</td>
+                    <td>05:00 PM</td>
+                    <td>Project A</td>
+                    <td>Client X</td>
+                    <td>8</td>
+                    <td>Approved</td>
+                </tr>
+                <tr>
+                    <td>25-01-2024</td>
+                    <td>09:00 AM</td>
+                    <td>06:00 PM</td>
+                    <td>Project A</td>
+                    <td>Client X</td>
+                    <td>9</td>
+                    <td>Approved</td>
+                </tr>
+                <!-- Add more rows as needed -->
+            </tbody>
+        </table>
+    </section>
+
+    <section style="padding: 20px; width: 24%; margin-top: 1px; margin-left: 70%;">
+
+        <label>Total Activity Hours:</label>
+        <input type="text" id="totalActivityHours" readonly>
+        
+    </section>
+
+</body>
+</html>

@@ -122,6 +122,48 @@ $(document).ready(function() {
             }
         });		
 	});
+	$("#dropdown").on("change", function () {
+        var selectedValue = $(this).val().trim();
+         var tableBody = $('#data-table tbody');
+        console.log("Selected Value: " + selectedValue);
+         if (selectedValue !== '') {
+		$.ajax({
+            url: '/searchAllByProject/' + selectedValue,
+            method: 'GET',
+            success: function(data) {
+				updateTable(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data from API:', error);
+            }
+         });	 
+		 }
+		 else{
+			    tableBody.empty();			  
+			 alert("Plz select correct Project name from dropdown");
+		 }
+     });
+     $("#dp").on("change", function () {
+        var selectedValue = $(this).val().trim();
+         var tableBody = $('#data-table tbody');
+        console.log("Selected Value: " + selectedValue);
+         if (selectedValue !== '') {
+		$.ajax({
+            url: '/searchAllByStatus/' + selectedValue,
+            method: 'GET',
+            success: function(data) {
+				updateTable(data);
+            },
+            error: function(error) {
+                console.error('Error fetching data from API:', error);
+            }
+         });	 
+		 }
+		 else{
+			    tableBody.empty();			  
+			 alert("Plz select correct Project name from dropdown");
+		 }
+     });
     function updateTable(data) {
         var tableBody = $('#data-table tbody');
         tableBody.empty();

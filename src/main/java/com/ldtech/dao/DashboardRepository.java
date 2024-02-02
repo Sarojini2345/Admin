@@ -5,6 +5,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import com.ldtech.entity.EmployeeAllocation;
+import com.ldtech.entity.EmployeeProfile;
+
 import java.util.List;
 
 public interface DashboardRepository extends JpaRepository<EmployeeAllocation, Long>{
@@ -17,4 +19,5 @@ public interface DashboardRepository extends JpaRepository<EmployeeAllocation, L
 	List<EmployeeAllocation> findAllByProjectClient(String client);
 	List<EmployeeAllocation> findAllByProjectManager(String manager);
 	EmployeeAllocation findByEmployeeId(String employeeName);
+	List<EmployeeAllocation> findAllByStatus(String status);
 }

@@ -1,5 +1,7 @@
 package com.ldtech.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -13,5 +15,8 @@ public class AdminLogin{
   @GeneratedValue(strategy=GenerationType.IDENTITY)
   private Integer id;
   private String admin_id;
+  private String email;
   private String password;
+  private String resetToken;
+  private LocalDateTime resetTokenExpiration;
 }

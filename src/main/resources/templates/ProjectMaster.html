@@ -1,25 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Information</title>
     <link rel="stylesheet" href="/css/Style.css">
-    
-
+ 
+    <script>
+    function addNewRow() {
+        var table = document.querySelector("table");
+        var newRow = table.insertRow(table.rows.length);
+ 
+        // Add cells to the new row
+        var cell1 = newRow.insertCell(0);
+        var cell2 = newRow.insertCell(1);
+        var cell3 = newRow.insertCell(2);
+        var cell4 = newRow.insertCell(3);
+        var cell5 = newRow.insertCell(4);
+        var cell6 = newRow.insertCell(5);
+        var cell7 = newRow.insertCell(6);
+        var cell8 = newRow.insertCell(7);
+ 
+        // Add input fields to cells
+        cell1.innerHTML = '<input type="text" name="newProjectId">';
+        cell2.innerHTML = '<input type="text" name="newProjectTitle">';
+        cell3.innerHTML = '<select name="newProjectType"><option value="" disabled selected>Select project type</option></select>';
+        cell4.innerHTML = '<input type="text" name="newProjectScope">';
+        cell5.innerHTML = '<input type="text" name="newClient">';
+        cell6.innerHTML = '<input type="date" name="newStartDate">';
+        cell7.innerHTML = '<input type="date" name="newEndDate">';
+        cell8.innerHTML = '<button type="button" onclick="saveNewRow(this)">Save</button>' +
+                          '<button type="button" onclick="cancelNewRow(this)">Cancel</button>';
+    }
+ 
+    function saveNewRow(button) {
+        var newRow = button.parentNode.parentNode;
+        var projectId = newRow.cells[0].querySelector('input').value;
+        var projectTitle = newRow.cells[1].querySelector('input').value;
+        var projectType = newRow.cells[2].querySelector('select').value;
+        var projectScope = newRow.cells[3].querySelector('input').value;
+        var client = newRow.cells[4].querySelector('input').value;
+        var startDate = newRow.cells[5].querySelector('input').value;
+        var endDate = newRow.cells[6].querySelector('input').value;
+ 
+        // TODO: Send this data to the server (Java backend) for saving to the database
+        // You can use AJAX or fetch API to send a request to the server.
+ 
+        // After saving to the database, update the UI with edit and delete buttons
+        newRow.cells[7].innerHTML = '<button type="button" onclick="editRow(this)">Edit</button>' +
+            '<button type="button" onclick="deleteRow(this)">Delete</button>';
+ 
+        // Optionally, you can also update the UI with the saved data
+        newRow.cells[0].innerHTML = projectId;
+        newRow.cells[1].innerHTML = projectTitle;
+        newRow.cells[2].innerHTML = projectType;
+        newRow.cells[3].innerHTML = projectScope;
+        newRow.cells[4].innerHTML = client;
+        newRow.cells[5].innerHTML = startDate;
+        newRow.cells[6].innerHTML = endDate;
+    }
+ 
+    function cancelNewRow(button) {
+        var newRow = button.parentNode.parentNode;
+        newRow.parentNode.removeChild(newRow);
+    }
+ 
+    function editRow(button) {
+        var row = button.parentNode.parentNode;
+ 
+        // Save the original content of each cell
+        for (var i = 0; i < row.cells.length - 1; i++) {
+            var cell = row.cells[i];
+            cell.setAttribute("data-original-content", cell.innerHTML);
+        }
+ 
+        // Replace the content with input fields for editing
+        for (var i = 0; i < row.cells.length - 1; i++) {
+            var cell = row.cells[i];
+            cell.innerHTML = '<input type="text" value="' + cell.getAttribute("data-original-content") + '">';
+        }
+ 
+        // Replace the Edit button with Save and Cancel buttons
+        var saveButton = document.createElement('button');
+        saveButton.innerHTML = 'Save';
+        saveButton.onclick = function () { saveEditedRow(row); };
+ 
+        var cancelButton = document.createElement('button');
+        cancelButton.innerHTML = 'Cancel';
+        cancelButton.onclick = function () { cancelEditRow(row); };
+ 
+        row.cells[row.cells.length - 1].innerHTML = '';
+        row.cells[row.cells.length - 1].appendChild(saveButton);
+        row.cells[row.cells.length - 1].appendChild(cancelButton);
+    }
+ 
+    function saveEditedRow(row) {
+        // Extract data from the edited row
+        for (var i = 0; i < row.cells.length - 1; i++) {
+            var cell = row.cells[i];
+            cell.innerHTML = cell.querySelector('input').value;
+        }
+ 
+        // Replace Save and Cancel buttons with Edit button
+        var editButton = document.createElement('button');
+        editButton.innerHTML = 'Edit';
+        editButton.onclick = function () { editRow(this); };
+ 
+        var deleteButton = document.createElement('button');
+        deleteButton.innerHTML = 'Delete';
+        deleteButton.onclick = function () { deleteRow(this); };
+ 
+        row.cells[row.cells.length - 1].innerHTML = '';
+        row.cells[row.cells.length - 1].appendChild(editButton);
+        row.cells[row.cells.length - 1].appendChild(deleteButton);
+    }
+ 
+    function cancelEditRow(row) {
+        // Restore the original content of each cell
+        for (var i = 0; i < row.cells.length - 1; i++) {
+            var cell = row.cells[i];
+            cell.innerHTML = cell.getAttribute("data-original-content");
+        }
+ 
+        // Replace Save and Cancel buttons with Edit button
+        var editButton = document.createElement('button');
+        editButton.innerHTML = 'Edit';
+        editButton.onclick = function () { editRow(this); };
+ 
+        var deleteButton = document.createElement('button');
+        deleteButton.innerHTML = 'Delete';
+        deleteButton.onclick = function () { deleteRow(this); };
+ 
+        row.cells[row.cells.length - 1].innerHTML = '';
+        row.cells[row.cells.length - 1].appendChild(editButton);
+        row.cells[row.cells.length - 1].appendChild(deleteButton);
+    }
+ 
+    function deleteRow(button) {
+        var row = button.parentNode.parentNode;
+        row.parentNode.removeChild(row);
+    }
+</script>
+ 
+</head>
+ 
 <body>
     <img src="https://www.ldtech.in/images/logo.png" alt="My Logo">
-    <button onclick="window.location.href='/getHome'" style="margin-left: 1330px; width: 100px;
-   
-    cursor: pointer;
-    color: black;
-    background-color: lightskyblue;
-    margin-right: 20px;
-    margin-top:none;
-    width:100px;
-    height:40px;
-   ">Home</button>
+    <button onclick="window.location.href='/getHome'" style="margin-left: 1330px; width: 100px; cursor: pointer; color: black; background-color: lightskyblue; margin-right: 20px; margin-top:none; width:100px; height:40px;">Home</button>
     <h2>Project Master Details :</h2>
     <form class="form-container">
         <div class="search-field">
@@ -27,90 +155,40 @@
             <input type="text" name="empId" placeholder="Search by Project ID "></input>
             <label>Search by Project Tittle</label>
             <input type="text" name="dept" placeholder="Search by Project Title"></input>
-            
         </div>
         <div class="search-field">
             <div class="input-container">
                 <label for="Project Type">Project Type</label>
                 <select id="Project Type" name="Project Type">
                     <option value="" disabled selected>Select project type</option>
-
                 </select>
                 <label>Search by client</label>
                 <input type="text" name="manager" placeholder="Search by client" style="padding: 10px 02px ;" />
             </div>
         </div>
         <div class="navigation">
-            
-            <button onclick="window.location.href='#'">Add New</button>
+            <button type="button" onclick="addNewRow()">Add New</button>
         </div>
-
     </form>
     <hr style="width: 100%; height:20% black; margin: 5px 0px;">
-
-
-
-
     <table>
         <thead>
             <tr>
                 <th>Project ID</th>
-                <th>Project Tittle</th>
+                <th>Project Title</th>
                 <th>Project Type</th>
                 <th>Project Scope</th>
-                <th>client</th>
+                <th>Client</th>
                 <th>Start Date</th>
-                <th>Expecte End Date</th>
+                <th>Expected End Date</th>
                 <th>Action</th>
             </tr>
         </thead>
-        <tr>
-            <td>LD0001</td>
-            <td>Timesheet Application</td>
-            <td>Regular</td>
-            <td><p>Lorem ipsum dolor sit amet.</p></td>
-            <td>Client X</td>
-            <td><input type="date"></td>
-            <td><input type="date"></td>
-            <td>
-                <button type="button" style="background-color: white;">Edit</button>
-                <button type="button" style="background-color: orangered;">Delete</button>
-                
-            </td>
-            
-            
-        </tr>
-        <tr>
-            <td>LD0002</td>
-            <td>Website</td>
-            <td>Regular</td>
-            <td><p>Lorem ipsum dolor sit amet.</p></td>
-            <td>Client Y</td>
-            <td><input type="date"></td>
-            <td><input type="date"></td>
-            <td>
-                    <button type="button" style="background-color: white;">Edit</button>
-                    <button type="button" style="background-color: orangered;">Delete</button>
-                
-            </td>
-            
-            
-        </tr>
-
-
-
-
-
-
+        <!-- Add tbody element for the table body -->
+        <tbody>
         </tbody>
- </table>
-
-    <div class="final">
-
-        <button type="button" style="background-color: green; padding: 10px 25px; color: white;" >save</button>
-        <button type="button" style="background-color: gray;padding: 10px 20px;color: white;">Cancel</button>
-
-    </div>
+    </table>
+    
 </body>
-
+ 
 </html>
