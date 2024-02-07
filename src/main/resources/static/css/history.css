@@ -12,6 +12,7 @@
 	flex-direction: column;
 	align-items: center;
 }
+
 .sbmaincontainer_1 {
 	width: 100%;
 	margin: 0 auto;
@@ -28,11 +29,12 @@
 	width: 100%;
 	display: flex;
 }
-table{
+
+table {
 	width: 100%;
 	width: 100%;
-	 border-collapse: collapse;
-	  text-align: left;
+	border-collapse: collapse;
+	text-align: left;
 }
 
 .table_headings {
@@ -45,7 +47,7 @@ table{
 	margin: 10px;
 }
 
-.button-div{
+.button-div {
 	text-align: end;
 }
 
@@ -69,7 +71,6 @@ table{
 
 .input-div label {
 	text-align: left;
-
 	width: 250px;
 	margin-right: 10px;
 	white-space: nowrap;
@@ -115,9 +116,20 @@ input:active {
 
 
 .table_headings,
-.marginset {
+tbody {
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
     max-width: 200px; /* Adjust the max-width as needed */
 }
+
+/* Apply similar styles to cells in the tbody */
+tbody td {
+    padding: 4px 10px;
+    margin: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px; /* Adjust the max-width as needed */
+}
+

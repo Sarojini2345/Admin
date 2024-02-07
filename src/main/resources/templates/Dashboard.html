@@ -29,7 +29,6 @@
     <div class="container">
        <!--  <img src="https://www.ldtech.in/images/logo.png" alt="Logo" class="logo" />-->
         
-        
         <h2>Dashboard Admin</h2>
         <form class="form-container">
             <div class="search-field">
@@ -99,7 +98,7 @@
             <div class="search-field">
                 <label>Allocation</label>
                 <div class="input-container">
-                    <select name="allocation">
+                    <select id="projectType" name="allocation">
                         <option value="">Select Allocation</option>
                         <option value="Billable">Billable</option>
                         <option value="Non-Billable">Non-Billable</option>
@@ -156,6 +155,6 @@
                 });
             })
             .catch(error => console.error('Error fetching dropdown options:', error));
-   </script>   
+   </script>  
 </body>
 </html>

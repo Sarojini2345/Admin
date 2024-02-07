@@ -42,11 +42,11 @@ $(document).ready(function() {
                 if (data) {
                     console.log("Dropdown Data:", data);
                      $("#reportingManager").val(data.manager);
-                     $("#proj").val(data.project_type);
+                     $("#proj").val(data.projectType);
                      $("#client").val(data.client);
                       $("#allocationStartDate").val(data.project_startdate);
                       $("#allocationEndDate").val(data.project_enddate);
-                     console.log(data.project_type);
+                     console.log(data.projectType);
                      
                     // Update the UI with the details from the dropdown data
                     // For example, if the data has a property 'projectName', you can do:

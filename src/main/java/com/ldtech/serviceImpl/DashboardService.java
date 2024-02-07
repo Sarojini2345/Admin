@@ -118,4 +118,22 @@ public class DashboardService implements IDashboardService{
 	public List<EmployeeAllocation> searchByProjectName(String projectName){
 		return repo.findAllByProjectProjectName(projectName);
 	}
+
+	@Override
+	public List<EmployeeProfile> searchAllEmployee() {
+		// TODO Auto-generated method stub
+		return repo1.findAll();
+	}
+
+	@Override
+	public List<EmployeeAllocation> searchAllEmployees() {
+		// TODO Auto-generated method stub
+		return repo.findAll();
+	}
+
+	@Override
+	public List<EmployeeAllocation> searchByProjectType(String project_type) {
+		// TODO Auto-generated method stub
+		return repo.findAllByProjectProjectType(project_type);
+	}
 }

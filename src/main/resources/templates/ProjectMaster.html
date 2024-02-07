@@ -6,8 +6,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Information</title>
     <link rel="stylesheet" href="/css/Style.css">
- 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script>
+    
+    $(document).ready(function() {
+        $("#empId").on("click", function() {
+            $("#dept, #projectType, #client").val("");
+        });
+        $("#dept").on("click", function() {
+            $("#empId, #projectType, #client").val("");
+        });
+        $("#client").on("click", function() {
+            $("#empId, #projectType, #dept").val("");
+        });
+        $("#project_type").on("change", function () {
+        	$("#empId, #client, #dept").val("");
+        });
+    });
+    
     function addNewRow() {
         var table = document.querySelector("table");
         var newRow = table.insertRow(table.rows.length);
@@ -23,42 +41,67 @@
         var cell8 = newRow.insertCell(7);
  
         // Add input fields to cells
-        cell1.innerHTML = '<input type="text" name="newProjectId">';
-        cell2.innerHTML = '<input type="text" name="newProjectTitle">';
-        cell3.innerHTML = '<select name="newProjectType"><option value="" disabled selected>Select project type</option></select>';
-        cell4.innerHTML = '<input type="text" name="newProjectScope">';
-        cell5.innerHTML = '<input type="text" name="newClient">';
-        cell6.innerHTML = '<input type="date" name="newStartDate">';
-        cell7.innerHTML = '<input type="date" name="newEndDate">';
+        cell1.innerHTML = '<input type="text" name="newManager" required />';
+        cell2.innerHTML = '<input type="text" name="newProjectTitle" >';
+        cell3.innerHTML = '<select name="newProjectType" required><option value="">Select project type</option><option value="Billable">Billable</option><option value="Non-Billable">Non-Billable</option></select>';
+        cell4.innerHTML = '<input type="text" name="newProjectScope" required>';
+        cell5.innerHTML = '<input type="text" name="newClient" required>';
+        cell6.innerHTML = '<input type="date" name="newStartDate" required>';
+        cell7.innerHTML = '<input type="date" name="newEndDate" required>';
+       
         cell8.innerHTML = '<button type="button" onclick="saveNewRow(this)">Save</button>' +
                           '<button type="button" onclick="cancelNewRow(this)">Cancel</button>';
     }
  
     function saveNewRow(button) {
         var newRow = button.parentNode.parentNode;
-        var projectId = newRow.cells[0].querySelector('input').value;
+        var projectManager = newRow.cells[0].querySelector('input').value;
         var projectTitle = newRow.cells[1].querySelector('input').value;
-        var projectType = newRow.cells[2].querySelector('select').value;
-        var projectScope = newRow.cells[3].querySelector('input').value;
+        var projectTypeSelect = document.getElementById('projectTypeSelect');
+        var projectType = projectTypeSelect.value;
+        var projectDescription = newRow.cells[3].querySelector('input').value;
         var client = newRow.cells[4].querySelector('input').value;
         var startDate = newRow.cells[5].querySelector('input').value;
         var endDate = newRow.cells[6].querySelector('input').value;
+      //  var projectId=newRow.cells[7].querySelector('input').value;
+      //  var manager=
+        
+        var requestData = {
+              //  project_Id: projectId,
+                projectName: projectTitle,
+                projectType: projectType,
+                projectDescription: projectDescription,
+                client: client,
+                project_startdate: startDate,
+                project_enddate: endDate,
+                manager:projectManager
+          };
  
         // TODO: Send this data to the server (Java backend) for saving to the database
         // You can use AJAX or fetch API to send a request to the server.
- 
+         var xhr = new XMLHttpRequest();
+             xhr.open('POST', '/addProject', true);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+
+              xhr.onreadystatechange = function () {
+              if (xhr.readyState == 4 && xhr.status == 200) {
         // After saving to the database, update the UI with edit and delete buttons
         newRow.cells[7].innerHTML = '<button type="button" onclick="editRow(this)">Edit</button>' +
             '<button type="button" onclick="deleteRow(this)">Delete</button>';
  
         // Optionally, you can also update the UI with the saved data
-        newRow.cells[0].innerHTML = projectId;
+        newRow.cells[0].innerHTML = projectManager;
         newRow.cells[1].innerHTML = projectTitle;
         newRow.cells[2].innerHTML = projectType;
         newRow.cells[3].innerHTML = projectScope;
         newRow.cells[4].innerHTML = client;
         newRow.cells[5].innerHTML = startDate;
         newRow.cells[6].innerHTML = endDate;
+      //  newRow.cells[6].innerHTML = projectId;
+        }
+      };
+      
+      xhr.send(JSON.stringify(requestData));
     }
  
     function cancelNewRow(button) {
@@ -68,54 +111,99 @@
  
     function editRow(button) {
         var row = button.parentNode.parentNode;
- 
+
         // Save the original content of each cell
         for (var i = 0; i < row.cells.length - 1; i++) {
             var cell = row.cells[i];
             cell.setAttribute("data-original-content", cell.innerHTML);
         }
- 
+
         // Replace the content with input fields for editing
         for (var i = 0; i < row.cells.length - 1; i++) {
             var cell = row.cells[i];
             cell.innerHTML = '<input type="text" value="' + cell.getAttribute("data-original-content") + '">';
         }
- 
+
         // Replace the Edit button with Save and Cancel buttons
         var saveButton = document.createElement('button');
         saveButton.innerHTML = 'Save';
         saveButton.onclick = function () { saveEditedRow(row); };
- 
+
         var cancelButton = document.createElement('button');
         cancelButton.innerHTML = 'Cancel';
         cancelButton.onclick = function () { cancelEditRow(row); };
- 
+
         row.cells[row.cells.length - 1].innerHTML = '';
         row.cells[row.cells.length - 1].appendChild(saveButton);
         row.cells[row.cells.length - 1].appendChild(cancelButton);
     }
- 
+
     function saveEditedRow(row) {
         // Extract data from the edited row
-        for (var i = 0; i < row.cells.length - 1; i++) {
-            var cell = row.cells[i];
-            cell.innerHTML = cell.querySelector('input').value;
-        }
- 
+         var project_id = document.querySelector('[name="empId"]').value;
+        var projectManager = row.cells[0].querySelector('input').value;
+        var projectTitle = row.cells[1].querySelector('input').value;
+        var projectType = projectType;
+        var projectScope = row.cells[3].querySelector('input').value;
+        var client = row.cells[4].querySelector('input').value;
+        var startDate = row.cells[5].querySelector('input').value;
+        var endDate = row.cells[6].querySelector('input').value;
+       // var projectId = row.cells[7].querySelector('input').value;
+		if (!projectManager || !projectTitle || !projectScope || !client || !startDate || !endDate) {
+        toastr.error('All fields are required');
+        return; // Stop further execution if any field is empty
+    }
         // Replace Save and Cancel buttons with Edit button
         var editButton = document.createElement('button');
         editButton.innerHTML = 'Edit';
         editButton.onclick = function () { editRow(this); };
- 
+
         var deleteButton = document.createElement('button');
         deleteButton.innerHTML = 'Delete';
         deleteButton.onclick = function () { deleteRow(this); };
- 
+
         row.cells[row.cells.length - 1].innerHTML = '';
         row.cells[row.cells.length - 1].appendChild(editButton);
         row.cells[row.cells.length - 1].appendChild(deleteButton);
+
+        // Update the UI with the saved data
+        row.cells[0].innerHTML = projectManager;
+        row.cells[1].innerHTML = projectTitle;
+        row.cells[2].innerHTML = projectType;
+        row.cells[3].innerHTML = projectScope;
+        row.cells[4].innerHTML = client;
+        row.cells[5].innerHTML = startDate;
+        row.cells[6].innerHTML = endDate;
+       // row.cell[7].innerHTML = projectId;
+
+        // TODO: Send this data to the server (Java backend) for saving to the database
+        // You can use AJAX or fetch API to send a request to the server.
+        var requestData = {
+        	project_id:project_id,
+            projectName: projectTitle,
+            projectType: projectType,
+            projectDescription: projectScope,
+            client: client,
+            project_startdate: startDate,
+            project_enddate: endDate,
+            manager: projectManager
+        };
+
+        var xhr = new XMLHttpRequest();
+        xhr.open('PUT', '/update', true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+     			toastr.success('Data updated successfully');
+                // You can handle any response from the server here
+            } else {
+                 error('Error updating data Status:', xhr.status);
+            }
+        };
+        xhr.send(JSON.stringify(requestData));
     }
- 
+    
     function cancelEditRow(row) {
         // Restore the original content of each cell
         for (var i = 0; i < row.cells.length - 1; i++) {
@@ -141,6 +229,104 @@
         var row = button.parentNode.parentNode;
         row.parentNode.removeChild(row);
     }
+   
+    function handleEnter(event) {
+        if (event.key === 'Enter') {
+            searchProjects();
+            console.log("Hey");
+        }
+    }
+    
+    function searchProjects() {
+        var projectId = document.querySelector('[name="empId"]').value;
+        var apiUrl = "/searchById/" + projectId;
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', apiUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    // Parse the response JSON into an object
+                    var responseObj = JSON.parse(xhr.responseText);
+                    // Update the table with the parsed object
+                    updateTable(responseObj);
+                } else {
+                    console.error('Error fetching data. Status:', xhr.status);
+                }
+            }
+        };
+        xhr.send();
+    }
+
+    var project_type;
+    function updateTable(projects) {
+        console.log('Received projects:', projects);
+        var tableBody = document.querySelector('tbody');
+		projectType= projects.projectType;
+        // Clear existing table rows
+        tableBody.innerHTML = '';
+
+        // Check if projects is an array or a single object
+        if (Array.isArray(projects)) {
+            // Loop through the projects and populate the table
+            for (var i = 0; i < projects.length; i++) {
+                var newRow = tableBody.insertRow(tableBody.rows.length);
+
+                // Add cells to the new row
+                var cells = [
+                    newRow.insertCell(0),
+                    newRow.insertCell(1),
+                    newRow.insertCell(2),
+                    newRow.insertCell(3),
+                    newRow.insertCell(4),
+                    newRow.insertCell(5),
+                    newRow.insertCell(6),
+                    newRow.insertCell(7)
+                ];
+
+                // Populate cells with project data
+                 cells[0].innerHTML = projects.manager;
+            cells[1].innerHTML = projects.projectName;
+            cells[2].innerHTML = projects.projectType;
+            cells[3].innerHTML = projects.projectDescription;
+            cells[4].innerHTML = projects.client;
+            cells[5].innerHTML = projects.project_startdate;
+            cells[6].innerHTML = projects.project_enddate;
+
+                // Add Edit and Delete buttons
+                cells[7].innerHTML = '<button type="button" onclick="editRow(this)">Edit</button>' +
+                    '<button type="button" onclick="deleteRow(this)">Delete</button>';
+            }
+        } else {
+            // It's a single object, not an array
+            var newRow = tableBody.insertRow(tableBody.rows.length);
+            var cells = [
+                newRow.insertCell(0),
+                newRow.insertCell(1),
+                newRow.insertCell(2),
+                newRow.insertCell(3),
+                newRow.insertCell(4),
+                newRow.insertCell(5),
+                newRow.insertCell(6),
+                newRow.insertCell(7)
+            ];
+
+            // Populate cells with project data for a single object
+            cells[0].innerHTML = projects.manager;
+            cells[1].innerHTML = projects.projectName;
+            cells[2].innerHTML = projects.projectType;
+            cells[3].innerHTML = projects.projectDescription;
+            cells[4].innerHTML = projects.client;
+            cells[5].innerHTML = projects.project_startdate;
+            cells[6].innerHTML = projects.project_enddate;
+
+            // Add Edit and Delete buttons
+            cells[7].innerHTML = '<button type="button" onclick="editRow(this)">Edit</button>' +
+                '<button type="button" onclick="deleteRow(this)">Delete</button>';
+        }
+    }
+
+    
 </script>
  
 </head>
@@ -152,18 +338,20 @@
     <form class="form-container">
         <div class="search-field">
             <label>Search by Project ID</label>
-            <input type="text" name="empId" placeholder="Search by Project ID "></input>
+            <input type="text" id="empId" name="empId" placeholder="Search by Project ID " onkeydown="handleEnter(event)"></input>
             <label>Search by Project Tittle</label>
-            <input type="text" name="dept" placeholder="Search by Project Title"></input>
+            <input type="text" id="dept" name="dept" placeholder="Search by Project Title"></input>
         </div>
         <div class="search-field">
             <div class="input-container">
-                <label for="Project Type">Project Type</label>
-                <select id="Project Type" name="Project Type">
-                    <option value="" disabled selected>Select project type</option>
+                <label for="projectType">Project Type</label>
+                <select id="projectType" name="projectType">
+                    <option value="">Select project type</option>
+                     <option value="Billable">Billable</option>
+                     <option value="Non-Billable">Non-Billable</option>
                 </select>
                 <label>Search by client</label>
-                <input type="text" name="manager" placeholder="Search by client" style="padding: 10px 02px ;" />
+                <input type="text" id="client" name="client" placeholder="Search by client" style="padding: 10px 02px ;" />
             </div>
         </div>
         <div class="navigation">
@@ -171,10 +359,10 @@
         </div>
     </form>
     <hr style="width: 100%; height:20% black; margin: 5px 0px;">
-    <table>
+    <table id="fg">
         <thead>
             <tr>
-                <th>Project ID</th>
+                <th>Project Manager</th>
                 <th>Project Title</th>
                 <th>Project Type</th>
                 <th>Project Scope</th>

@@ -14,4 +14,11 @@ public interface IDashboardService {
 	List<EmployeeAllocation> searchByManager(String manager);
 	List<EmployeeAllocation> searchByStatus(String status);
 	AdminLogin checkCredentials(String admin_id, String password);
+	List<EmployeeProfile> searchAllEmployee();
+	List<EmployeeAllocation> searchAllEmployees();
+	List<EmployeeAllocation> searchByProjectType(String project_type);
+	List<EmployeeAllocation> searchAllByDepartment(String str);
+	List<EmployeeAllocation> searchByProjectName(String str);
+	List<EmployeeAllocation> searchByEmployeeIddetails(String str);
+	List<EmployeeAllocation> searchByEmployeeNamedetails(String str);
 }

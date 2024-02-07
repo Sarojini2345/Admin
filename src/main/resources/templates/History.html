@@ -2,19 +2,18 @@
 <html lang="en">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>webpage</title>
-<link rel="stylesheet" href="/css/History.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>webpage</title>
+	<link rel="stylesheet" href="/css/History.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" th:src="@{/js/history.js}">
+	</script>
 </head>
-
 
 <body>
 	<div class="header">
-		<img src="https://www.ldtech.in/images/logo.png" alt="logo_comp"
-			class="headerlogo">
+		<img src="https://www.ldtech.in/images/logo.png" alt="logo_comp" class="headerlogo">
 	</div>
 	<div class="header_text">
 		<h3 id="header-text">History</h3>
@@ -25,42 +24,39 @@
 				<div>
 					<div class="input-div">
 						<label>Search By Emp Id:</label>
-						<form class="example" action="action_page.php">
-							<input type="text" placeholder="Search.." name="search" />
-							<button type="submit">
-								<i class="fa fa-search"></i>
-							</button>
+						<form id="searchByIdForm">
+							<input type="text" id="searchByIdInput" placeholder="Search.." name="search" />
+							<button type="submit"><i class="fa fa-search"></i></button>
 						</form>
-					</div>
-					<div class="input-div">
-						<label>Search By Emp Name:</label>
-						<form class="example" action="action_page.php">
-							<input type="text" placeholder="Search.." name="search" />
-							<button type="submit">
-								<i class="fa fa-search"></i>
-							</button>
-						</form>
-					</div>
-				</div>
-				<div>
-					<div class="input-date-div">
-						<label> From Date:</label> <input type="date"
-							class="leftside_inputbox" />
 					</div>
 
-					<div class="input-date-div">
-						<label>To Date:</label> <input type="date"
-							class="rightside_inputbox" />
+					<div class="input-div">
+						<label>Search By Emp Name:</label>
+						<form id="searchByNameForm">
+							<input type="text" id="searchByNameInput" placeholder="Search.." name="search" />
+							<button type="submit"><i class="fa fa-search"></i></button>
+						</form>
 					</div>
+
+				</div>
+				<div id = "searchByDateForm">
+					<div class="input-date-div">
+        <label> From Date:</label>
+        <input type="date" class="leftside_inputbox" id="fromDateInput" />
+    </div>
+
+    <div class="input-date-div">
+        <label>To Date:</label>
+        <input type="date" class="rightside_inputbox" id="toDateInput" />
+    </div>
+    <button type="submit">Search By Date</button>
 				</div>
 
 			</div>
 		</div>
-	</div>
-	<br>
-	<br>
+	</div><br><br>
 	<hr>
-	<table>
+	<table id="dataTable">
 		<colgroup>
 			<col style="width: 10%;" class="table_headings">
 			<col style="width: 10%;" class="table_headings">
@@ -87,43 +83,8 @@
 				<th class="table_headings">Allocation End Date</th>
 			</tr>
 		</thead>
-		<tbody>
-			<tr>
-				<td class="marginset">rlkbggnb</td>
-				<td class="marginset">ethgtegh</td>
-				<td class="marginset">teetgh</td>
-				<td class="marginset">rtgerg</td>
-				<td class="marginset">ergerg</td>
-				<td class="marginset">rgerg</td>
-				<td class="marginset">reger</td>
-				<td class="marginset">ergerger</td>
-				<td class="marginset">rlkbgg</td>
-				<td class="marginset">rlkbgk</td>
-			</tr>
-			<tr>
-				<td class="marginset">rlkbggnbrlkbggnbrlkbggnbrlkbggnbrlkbggnbrlkbgg</td>
-				<td class="marginset">ethgtegh</td>
-				<td class="marginset">teetgh</td>
-				<td class="marginset">rtgerg</td>
-				<td class="marginset">ergerg</td>
-				<td class="marginset">rgerg</td>
-				<td class="marginset">reger</td>
-				<td class="marginset">ergerger</td>
-				<td class="marginset">rlkbgg</td>
-				<td class="marginset">rlkbgk</td>
-			</tr>
-			<tr>
-				<td class="marginset">rlkbggnb</td>
-				<td class="marginset">ethgtegh</td>
-				<td class="marginset">teetgh</td>
-				<td class="marginset">rtgerg</td>
-				<td class="marginset">ergerg</td>
-				<td class="marginset">rgerg</td>
-				<td class="marginset">reger</td>
-				<td class="marginset">ergerger</td>
-				<td class="marginset">rlkbgg</td>
-				<td class="marginset">rlkbgk</td>
-			</tr>
+		<tbody id="tableBody">
+
 		</tbody>
 	</table>
 	<div class="button-div">
