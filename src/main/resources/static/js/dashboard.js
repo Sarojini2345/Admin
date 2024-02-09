@@ -1,6 +1,7 @@
 $(document).ready(function() {
 	
     $('#search-icon1').click(function() {
+		$("#dept, #projectType, #client, #empName, #manager, #dp, #dropdown").val("");
         var empId = $('input[name="empId"]').val();
        //  var tableBody = $('#data-table tbody');
        //  tableBody.empty();
@@ -38,6 +39,7 @@ $(document).ready(function() {
     });
      // Make an API request with the empName
    $('#search-icon3').click(function() {
+	$("#dept, #projectType, #client, #employeeId, #manager, #dp, #dropdown").val("");
     var empName = $('input[name="empName"]').val();
     var tableBody = $('#data-table tbody');
     $.ajax({
@@ -96,6 +98,7 @@ $(document).ready(function() {
 });
 	
 	$('#search-icon2').click(function() {
+		$("#employeeId, #projectType, #client, #empName, #manager, #dp, #dropdown").val("");
 		 var department = $('input[name="dept"]').val();
 		$.ajax({
             url: '/searchAllByDept/' + department,
@@ -126,6 +129,7 @@ $(document).ready(function() {
         });		
 	});
 	 $('#search-icon4').click(function() {
+		 $("#employeeId, #projectType, #client, #empName, #dept, #dp, #dropdown").val("");
 		 var manager = $('input[name="manager"]').val();
 		$.ajax({
             url: '/searchAllByManager/' + manager,
@@ -139,6 +143,7 @@ $(document).ready(function() {
         });		
 	});
 	 $('#search-icon5').click(function() {
+		 $("#employeeId, #projectType, #dept, #empName, #manager, #dp, #dropdown").val("");
 		 var client = $('input[name="client"]').val();
 		$.ajax({
             url: '/searchAllByClient/' + client,
@@ -152,6 +157,7 @@ $(document).ready(function() {
         });		
 	});
 	$("#dropdown").on("change", function () {
+		$("#employeeId, #projectType, #client, #empName, #manager, #dp, #dept").val("");
         var selectedValue = $(this).val().trim();
          var tableBody = $('#data-table tbody');
         console.log("Selected Value: " + selectedValue);
@@ -173,6 +179,7 @@ $(document).ready(function() {
 		 }
      });
      $("#dp").on("change", function () {
+		 $("#employeeId, #projectType, #client, #empName, #manager, #dept, #dropdown").val("");
         var selectedValue = $(this).val().trim();
          var tableBody = $('#data-table tbody');
         console.log("Selected Value: " + selectedValue);
@@ -226,9 +233,13 @@ $(document).ready(function() {
 		 }
      });
      $("#projectType").on("change", function () {
+		$("#employeeId, #dept, #client, #empName, #manager, #dp, #dropdown").val("");
         var selectedValue = $(this).val().trim();
         console.log(selectedValue);
          var tableBody = $('#data-table tbody');
+        if(selectedValue!==""){
+        console.log(selectedValue);
+         //var tableBody = $('#data-table tbody');
            $.ajax({
             url: '/findByProjectType/'+selectedValue,
             method: 'GET',
@@ -243,6 +254,11 @@ $(document).ready(function() {
              }	
          
          });
+        }
+         else{
+			 tableBody.empty();
+			 alert("select proper allocation");
+		 }
          
       });
     function updateTable(data) {
@@ -263,7 +279,7 @@ $(document).ready(function() {
                 '<td>' + row.project.project_startdate + '</td>' +
                 '<td>' + row.project.project_enddate + '</td>' +
                 '</tr>';
-            tableBody.append(tableRow);
+           tableBody.append(tableRow);
       });
     }
 });
