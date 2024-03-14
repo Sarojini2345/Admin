@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Information</title>
+    <link rel="stylesheet" href="/css/Style.css">
+    
+
+<body>
+    <img src="https://www.ldtech.in/images/logo.png" alt="My Logo">
+    <button onclick="window.location.href='/getHome'" style="margin-left: 1330px; width: 100px;
+   
+    cursor: pointer;
+    color: black;
+    background-color: lightskyblue;
+    margin-right: 20px;
+    
+   ">Home</button>
+    <h2>Project Master Details :</h2>
+
+
+    <form class="form-container">
+        <div class="search-field">
+            <label>Search by Project ID</label>
+            <input type="text" name="empId" placeholder="Search by Project ID "></input>
+            <label>Search by Project Tittle</label>
+            <input type="text" name="dept" placeholder="Search by Project Title"></input>
+            
+        </div>
+
+
+
+        <div class="search-field">
+            <div class="input-container">
+                <label for="Project Type">Project Type</label>
+                <select id="Project Type" name="Project Type">
+                    <option value="" disabled selected>Select project type</option>
+
+                </select>
+                <label>Search by client</label>
+                <input type="text" name="manager" placeholder="Search by client" style="padding: 10px 02px ;" />
+            </div>
+        </div>
+        <div class="navigation">
+            
+            <button onclick="window.location.href='#'">Add New</button>
+        </div>
+
+    </form>
+    <hr style="width: 100%; height:20% black; margin: 5px 0px;">
+
+
+
+
+    <table>
+        <thead>
+            <tr>
+                <th>Project ID</th>
+                <th>Project Tittle</th>
+                <th>Project Type</th>
+                <th>Project Scope</th>
+                <th>client</th>
+                <th>Start Date</th>
+                <th>Expecte End Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>LD0001</td>
+            <td>Timesheet Application</td>
+            <td>Regular</td>
+            <td><p>Lorem ipsum dolor sit amet.</p></td>
+            <td>Client X</td>
+            <td><input type="date"></td>
+            <td><input type="date"></td>
+            <td>
+                <button type="button" style="background-color: white;">Edit</button>
+                <button type="button" style="background-color: orangered;">Delete</button>
+                
+            </td>
+            
+            
+        </tr>
+        <tr>
+            <td>LD0002</td>
+            <td>Website</td>
+            <td>Regular</td>
+            <td><p>Lorem ipsum dolor sit amet.</p></td>
+            <td>Client Y</td>
+            <td><input type="date"></td>
+            <td><input type="date"></td>
+            <td>
+                    <button type="button" style="background-color: white;">Edit</button>
+                    <button type="button" style="background-color: orangered;">Delete</button>
+                
+            </td>
+            
+            
+        </tr>
+
+
+
+
+
+
+        </tbody>
+ </table>
+
+    <div class="final">
+
+        <button type="button" style="background-color: green; padding: 10px 25px; color: white;" >save</button>
+        <button type="button" style="background-color: gray;padding: 10px 20px;color: white;">Cancel</button>
+
+    </div>
+</body>
+
+</html>

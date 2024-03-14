@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Employee-Allocation</title>
+
+	<link th:href="@{/css/employee_allocation.css}" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script type="text/javascript" th:src = "@{/js/employee_allocation.js}"></script>
+</head>
+
+<body>
+	<div class="home">
+	 <img id="add" src="https://www.ldtech.in/images/logo.png" alt="Logo"></img>
+	 <a href="/getHome"><button class="btn">Home</button></a>
+	</div>
+	<div class="container">
+	 
+		<p class="title">Employee Application</p>
+		<form id="myForm">
+			<div class="form-group">
+				<label for="employeeId">Employee Id:</label>
+                <input type="text" class="eidInput" id="employeeId" name="employeeId" required />
+			</div>
+			<div class="form-group">
+				<label for="employeeName">Employee Name:</label>
+				<input type="text" id="employeeName" name="employeeName" required />
+			</div>
+
+			<div class="form-group">
+				<label for="department">Department:</label>
+				<input type="text" id="department" name="department" required />
+			</div>
+			<div class="form-group">
+				<label for="project">Project:</label>
+				<select id="dropdown" name="project">
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="projectAllocation">Project Allocation:</label>
+				<select id="proj" name="project_type">
+					<option value="">Select Allocation</option>
+					<option value="Billable">Billable</option>
+					<option value="NonBillable">Non-Billable</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label for="client">Client:</label>
+				<input type="text" id="client" name="client" >
+			</div>
+			<div class="form-group">
+				<label for="reportingManager">Reporting Manager:</label>
+				<input type="text" id="reportingManager" name="manager">
+			</div>
+			<div class="form-group">
+				<label for="allocationStartDate">Allocation start Date:</label>
+				<input type="date" id="allocationStartDate" name="project_startdate">
+			</div>
+			<div class="form-group">
+				<label for="allocationEndDate">Allocation end Date:</label>
+				<input type="date" id="allocationEndDate" name="project_enddate">
+			</div>
+
+			<div class="button-group">
+				<button type="button" onclick="submitForm()">Submit</button>
+				<a href="/getHome"><button type="button">Back</button></a>
+			</div>
+
+		</form>
+	</div>
+	<script>
+        // Fetch dropdown options from the API
+        fetch('/getDropdown') 
+            .then(response => response.json())
+            .then(data => {
+                // Get the select element
+                const dropdown = document.getElementById('dropdown');
+
+        // Add a static "Select Project" option
+            const selectProjectOption = document.createElement('option');
+            selectProjectOption.value = ''; // Set the value accordingly
+            selectProjectOption.text = 'Select Project';
+            dropdown.appendChild(selectProjectOption);
+
+                // Iterate through the data and create option elements
+                data.forEach(option => {
+                    const optionElement = document.createElement('option');
+                    optionElement.value = option.projectName;
+                    console.log(optionElement.value);
+                    optionElement.text = option.projectName;
+                    dropdown.appendChild(optionElement);
+                });
+            })
+            .catch(error => console.error('Error fetching dropdown options:', error));
+   </script>
+  <script>
+    function submitForm() {
+        // Get form values
+        var employeeId = $('#employeeId').val();
+        var employeeName = $('#employeeName').val();
+        var department = $('#department').val();
+        var projectName = $('#dropdown').val();
+        var projectAllocation = $('#proj').val();
+        var client= $('#client').val();
+        var manager=$('#reportingManager').val();
+        var startdate=$('#allocationStartDate').val();
+        var enddate=$('#allocationEndDate').val();
+
+        // Construct JSON object
+        var jsonData = {
+            "employeeId": employeeId,
+            "employeeName": employeeName,
+            "department": department,
+            "project": {
+                "projectName": projectName,
+                "manager":manager,
+                "client":client,
+                "project_startdate":startdate,
+                "project_enddate":enddate,
+                "project_type":projectAllocation
+                // Add other project-related fields here
+            }
+        };
+
+        // Log the constructed JSON object
+        console.log(jsonData);
+
+        // Send the JSON data to the server using AJAX
+        $.ajax({
+            type: 'POST',
+            url: '/insertData',
+            contentType: 'application/json',
+            data: JSON.stringify(jsonData),
+            success: function(data) {
+                alert(data);
+                
+                // Handle success if needed
+            },
+            error: function(error) {
+                console.error('Error:', error);
+                // Handle error if needed
+            }
+        });
+    }
+</script>
+</body>
+</html>

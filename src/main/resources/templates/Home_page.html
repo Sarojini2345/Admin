@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Side Navbar Example</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<style>
+body {
+	margin: 0;
+	padding: 0;
+	font-family: 'Arial', sans-serif;
+}
+
+/* Add this CSS to your existing styles */
+.date-time-card {
+	position: absolute;
+	margin-left: 800px;
+	margin-top: 20px;
+	height: 40px;
+	width: 250px;
+	top: 10%;
+	left: 40%; /* Adjust the left position as needed */
+	transform: translate(-50%, -50%);
+	background-color: #8E7AB5;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+}
+
+.date-time {
+	cursor: pointer; /* Add cursor pointer to indicate it's clickable */
+}
+
+/* Adjustments for responsiveness */
+@media ( max-width : 768px) {
+	.date-time-card {
+		top: 5%;
+		left: 10%;
+	}
+}
+
+/* Common Styles */
+a {
+	text-decoration: none;
+	color: #333;
+	font-size: 18px;
+}
+
+/* Dashboard Container */
+.dashboard-container {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.chart-container {
+	margin-top: 400px;
+}
+
+/* Sidebar */
+.sidebar-container {
+	background-color: #f0f2f5;
+	width: 18%;
+	/* Adjusted width to 100% for responsiveness */
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	padding: 20px;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	margin-top: 64px;
+}
+
+.header-container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+	background-color: #333;
+	color: #fff;
+}
+
+.logo-container {
+	display: flex;
+	align-items: center;
+}
+
+.logo {
+	width: 200px;
+	/* Adjust as needed */
+}
+
+.toggle-button {
+	position: fixed;
+	top: 20px;
+	left: 20px;
+	z-index: 1100;
+	cursor: pointer;
+}
+
+/* Rest of your CSS styles */
+
+/* Menu Container */
+.menu-container {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	width: 100%;
+}
+
+/* Menu Item */
+.menu-item {
+	margin-bottom: 10px;
+}
+
+/* Menu Link */
+.menu-link {
+	display: flex;
+	align-items: center;
+	padding: 10px 15px;
+	border-radius: 5px;
+	text-decoration: none;
+	color: #333;
+}
+
+/* .menu-link:hover {
+			background-color: #e0e4e8;
+		} */
+
+/* Menu Icon */
+.menu-icon {
+	margin-right: 10px;
+}
+
+.status-container {
+	margin-top: 20px;
+	width: 100%;
+	height: 25%;
+	/* Adjusted width to 60% */
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	/* Changed to column for stacking */
+	position: fixed;
+	top: 15%;
+	left: 22%;
+	/* Added left value to push it to the right of the sidebar */
+	padding: 10px;
+	z-index: 1000;
+	box-sizing: border-box;
+}
+
+.status-box {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	padding: 10px;
+	margin-left: 15px;
+	width: 24%;
+	height: 100%;
+	/* Adjusted width to 100% for responsiveness */
+	box-sizing: border-box;
+	margin-bottom: 10px;
+	justify-content: center;
+	/* Added margin for spacing */
+}
+
+.chart-container {
+	width: 50%;
+	/* Adjust the width as needed */
+	margin: auto;
+	/* Center the container */
+	text-align: center;
+	margin-top: 260px;
+}
+
+#employeeChart {
+	width: 40%;
+	/* Adjust the width as needed */
+	height: auto;
+	margin: auto;
+}
+
+/* Sign Out Button */
+.sign-out-button {
+	background-color: #333;
+	color: #fff;
+	padding: 10px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+/* Status Title */
+.status-title {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+/* Status Count */
+.status-count {
+	font-size: 20px;
+}
+
+.pending-div {
+	position: absolute;
+	top: 10%;
+	left: 30%;
+	transform: translate(-20%, -20%);
+	text-align: center;
+	display: flex;
+	justify-content: start;
+	align-items: center;
+	padding-left: 20px;
+	width: 30%;
+	height: 5.5%;
+	background-color: rgb(255, 255, 0);
+	margin-top: 20px;
+}
+
+/* Footer */
+.footer-container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin-top: auto;
+	margin-top: 20px;
+}
+
+.sign-out-button {
+	background-color: #333;
+	color: #fff;
+	padding: 10px 45px;
+	/* Adjusted padding to make it responsive */
+	min-width: 95px;
+	/* Added min-width to ensure it doesn't collapse completely */
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+}
+
+/* Responsive Styles */
+@media ( min-width : 768px) {
+	/* Add styles specific to larger screens if needed */
+}
+
+/* Calendar Styles */
+.calendar {
+	position: absolute;
+	top: 100%; /* Position it below the date-time card */
+	left: 0;
+	display: none; /* Initially hide the calendar */
+	background-color: #fff;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	z-index: 1000;
+}
+
+.calendar-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px;
+	border-bottom: 1px solid #ddd;
+}
+
+.calendar-header span {
+	cursor: pointer;
+}
+
+.calendar-body {
+	padding: 10px;
+}
+
+/* Add more styles as needed for the calendar body and days */
+.sidebar-container {
+	background-color: #f0f2f5;
+	position: fixed;
+	top: 4px;
+	left: 0;
+	width: 230px;
+	height: 100%;
+	padding-top: 20px;
+	overflow-x: hidden;
+	transition: 0.5s;
+	z-index: 1;
+}
+
+.sidebar-container.minimized {
+	width: 92px;
+	/* Set the minimized width */
+}
+
+.menu-container {
+	list-style-type: none;
+	padding-top: 10px;
+	margin: 0;
+	padding: 0;
+	margin-top: 20px;
+}
+
+.menu-item {
+	padding: 10px 20px;
+	color: black;
+	height: 40px;
+	display: flex;
+	align-items: center;
+}
+
+.menu-item:hover {
+	background-color: rgb(221, 232, 202);
+}
+
+.menu-link {
+	text-decoration: none;
+	color: black;
+}
+
+.menu-item i {
+	margin-right: 10px;
+}
+
+.toggle-icon {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	cursor: pointer;
+	color: black;
+	font-size: 20px;
+	margin-left: 1;
+}
+
+.sidebar-container.minimized {
+	left: -5px !important;
+	/* Adding !important to ensure this rule takes precedence */
+}
+
+.menu-item.minimized .menu-link span {
+	display: none;
+}
+
+.menu-item.minimized .menu-link i {
+	visibility: visible;
+}
+
+/* CSS for active menu item */
+.menu-item.active {
+	background-color: rgb(221, 232, 202);
+	/* Change this to the color you want */
+	color: #fff;
+	/* Text color for active menu item */
+}
+</style>
+</head>
+
+<body>
+	<div class="header-container">
+		<div class="logo-container">
+			<img src="https://ldtech.in/wp-content/uploads/2024/01/logo.png" alt="logo" class="logo">
+		</div>
+	</div>
+	
+	<div class="sidebar-container" id="sidebar">
+		<div class="toggle-icon" onclick="toggleSidebar()">
+			<i class="fas fa-bars"></i>
+		</div>
+		<ul class="menu-container" id="maincontent">
+			<li class="menu-item "><a href="/dashboard" class="menu-link">
+					<i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+			<li class="menu-item"><a href="/projectMaster" class="menu-link">
+					<i class="fas fa-project-diagram"></i><span>Project Master</span></a></li>
+			<li class="menu-item"><a href="/hello" class="menu-link">
+					<i class="fas fa-user"></i><span>Employee Allocation</span></a></li>
+			<li class="menu-item"><a href="/benchEmp" class="menu-link">
+					<i class="fas fa-user-clock"></i><span>Bench Employees</span></a></li>
+			<li class="menu-item "><a href="/history" class="menu-link">
+					<i class="fas fa-history"></i><span>History</span></a></li>
+			<li class="menu-item"><a href="/Timesheet" class="menu-link">
+					<i class="fas fa-clock"></i><span>Timesheet</span></a></li>
+		</ul>
+		
+		<div class="footer-container">
+				<a href="/getPage">
+					<button class="sign-out-button">Sign Out</button>
+				</a>
+			</div>
+	</div>
+	
+	
+	<div class="dashboard-container">
+
+		
+		<div class="pending-div">
+			<span class="pending">No pending task</span>
+		</div>
+
+         <div class="date-time-card">
+           <div class="date-time" id="currentDateTime"></div>
+        </div>
+
+        
+      <div id="calendar" class="calendar"  style="display: none";>
+        <div class="calendar-header">
+        <span id="prevMonth">&lt;</span>
+        <span id="currentMonthYear"></span>
+        <span id="nextMonth">&gt;</span>
+        </div>
+         <div class="calendar-body">
+        <!-- Calendar days will be dynamically generated here -->
+          </div>
+       </div>
+
+		<div class="status-container">
+			<div class="status-box" style="background-color: #ffa766;">
+				<p id="one"></p>
+				<span class="status-count">Total no. of Employees</span>
+			</div>
+
+			<div class="status-box" style="background-color: #ff6666;">
+				<p id="two"></p>
+				<span class="status-count">Unallocated Employee</span>
+			</div>
+
+			<div class="status-box" style="background-color: #1aff9a;">
+				<p id="three"></p>
+				<span class="status-count">Allocated Employee</span>
+			</div>
+		</div>
+
+		<div class="chart-container">
+			<canvas id="employeeChart"></canvas>
+		</div>
+
+	</div>
+<script>
+	function toggleSidebar() {
+		const sidebar = document.getElementById('sidebar');
+		const maincontent = document.getElementById('maincontent');
+		const menuItems = document.querySelectorAll('.menu-item');
+
+		// Toggle minimized class for sidebar and maincontent
+		sidebar.classList.toggle('minimized');
+		maincontent.classList.toggle('minimized');
+
+		// Toggle minimized class for menu items
+		menuItems.forEach(item => {
+			item.classList.toggle('minimized');
+		});
+	}
+	
+	/* function updateDateTime() {
+        var currentDateTimeElement = document.getElementById('currentDateTime');
+        var currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        var currentTime = new Date().toLocaleTimeString('en-US');
+        currentDateTimeElement.innerHTML = `<strong>${currentDate}</strong><br>${currentTime}`;
+    }
+
+    // Update date and time initially
+    updateDateTime();
+
+    // Update date and time every second
+    setInterval(updateDateTime, 1000); */
+    
+    
+ // Function to show or hide the calendar
+    function toggleCalendar() {
+        var calendar = document.getElementById('calendar');
+        calendar.style.display = (calendar.style.display === 'block') ? 'none' : 'block';
+    }
+
+    // Function to update the current date and time
+    function updateDateTime() {
+        var currentDateTimeElement = document.getElementById('currentDateTime');
+        var currentDate = new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+        var currentTime = new Date().toLocaleTimeString('en-US');
+        currentDateTimeElement.innerHTML = `<strong>${currentDate}</strong><br>${currentTime}`;
+
+        // Add click event listener to the date-time element to toggle calendar visibility
+        currentDateTimeElement.addEventListener('click', toggleCalendar);
+    }
+
+    // Update date and time initially
+    updateDateTime();
+
+    // Update date and time every second
+    setInterval(updateDateTime, 1000);
+
+  	
+	
+		fetch('/countEmployee') // Replace with your actual API endpoint
+			.then(response => response.json())
+			.then(data => {
+				// Update the content of the 'Total no. of Employees' element
+				document.getElementById('one').innerText += `  ${data}`;
+			})
+		// Fetch total number of employees from the API
+		fetch('/countAllocated') // Replace with your actual API endpoint
+			.then(response => response.json())
+			.then(data => {
+				// Update the content of the 'Total no. of Employees' element
+				document.getElementById('three').innerText += `  ${data}`;
+
+				// Fetch total number of unallocated employees from the API
+				fetch('/countUnAllocated') // Replace with your actual API endpoint
+					.then(response => response.json())
+					.then(unallocatedData => {
+						// Update the content of the 'Unallocated Employee' element
+						document.getElementById('two').innerText += `  ${unallocatedData}`;
+
+						// Calculate the allocated employees based on the total and unallocated employees
+						var totalEmployees = data + unallocatedData;
+						var allocatedEmployees = totalEmployees - unallocatedData;
+
+						// Get the canvas element
+						var ctx = document.getElementById('employeeChart').getContext('2d');
+
+						// Create a pie chart
+						var employeeChart = new Chart(ctx, {
+							type: 'pie',
+							data: {
+								labels: ['Allocated Employees', 'Unallocated Employees'],
+								datasets: [{
+									data: [allocatedEmployees, unallocatedData],
+									backgroundColor: ['#1aff9a', '#ff6666'],
+								}]
+							},
+							options: {
+								title: {
+									display: true,
+									text: 'Employee Allocation Overview'
+								}
+							}
+						});
+					})
+					.catch(error => console.error('Error fetching unallocated data:', error));
+			})
+			.catch(error => console.error('Error fetching allocated data:', error));
+	</script>
+</body>
+</html>

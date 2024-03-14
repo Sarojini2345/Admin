@@ -1,0 +1,77 @@
+$(document).ready(function() {
+	$("#employeeId").on("blur", function() {
+		var employeeId = $(this).val();
+		console.log("Employee Id" + employeeId);
+		if (employeeId.trim() !== '') {
+			// Make an AJAX call to retrieve data based on the employeeId
+			$.ajax({
+				url: '/hello/' + employeeId, // Use the correct endpoint
+				type: 'GET',
+				success: function(data) {
+					if (data) {
+						console.log("hii");
+						$("#employeeName").val(data.employeeName);
+						$("#department").val(data.department);
+						//console.log(data.project.projectName);
+						// $("#dropdown").val(data.project.projectName);
+						// Handle other fields similarly
+					} else {
+						alert("No data found for the given employee ID");
+					}
+				},
+				error: function() {
+					toastr.error("Error fetching employee data");
+				}
+			});
+		}
+	});
+
+	$("#dropdown").on("change", function() {
+		var selectedValue = $(this).val().trim();
+		console.log("Selected Value: " + selectedValue);
+		if (selectedValue !== '') {
+			fetchDataBasedOnDropdown(selectedValue);
+		}
+	});
+
+	function fetchDataBasedOnDropdown(selectedValue) {
+		$.ajax({
+			url: '/api/' + selectedValue, // Replace with the correct endpoint based on the selected dropdown
+			type: 'GET',
+			success: function(data) {
+				if (data) {
+					console.log("Dropdown Data:", data);
+					$("#reportingManager").val(data.manager);
+					$("#proj").val(data.projectType);
+					$("#client").val(data.client);
+					$("#allocationStartDate").val(data.project_startdate);
+					$("#allocationEndDate").val(data.project_enddate);
+					console.log(data.projectType);
+
+					// Update the UI with the details from the dropdown data
+					// For example, if the data has a property 'projectName', you can do:
+					// $("#projectDetails").text("Project Details: " + data.projectName);
+				} else {
+					alert("No data found for the selected value");
+				}
+			},
+			error: function() {
+				alert("Error fetching data for the selected value");
+			}
+		});
+	}
+});
+function toggleSidebar() {
+	const sidebar = document.getElementById('sidebar');
+	const maincontent = document.getElementById('maincontent');
+	const menuItems = document.querySelectorAll('.menu-item');
+
+	// Toggle minimized class for sidebar and maincontent
+	sidebar.classList.toggle('minimized');
+	maincontent.classList.toggle('minimized');
+
+	// Toggle minimized class for menu items
+	menuItems.forEach(item => {
+		item.classList.toggle('minimized');
+	});
+}

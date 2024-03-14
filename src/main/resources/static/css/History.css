@@ -1,0 +1,240 @@
+ body {
+ 	margin: 0;
+ 	padding: 0;
+ 	font-family: 'Arial', sans-serif;
+ }
+ 
+
+
+ .header {
+ 	display: flex;
+ 	align-items: center;
+ 	justify-content: space-between;
+ 	padding: 10px 20px;
+ 	background-color: #333;
+ 	color: #fff;
+ 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ }
+
+ .headerlogo {
+ 	width: 100px;
+ }
+
+ #header-text {
+ 	margin: 0;
+ 	font-size: 24px;
+ 	text-align: center;
+ 	flex-grow: 1;
+ }
+
+ .maincontainerbox {
+ 	padding: 20px;
+ 	margin-left: 250px;
+ 	/* Ensure content doesn't go behind the sidebar */
+ 	transition: margin-left 0.5s;
+ 	/* Add transition for smooth animation */
+ }
+
+ /* Adjust maincontainerbox margin based on sidebar state */
+ .sidebar-container.minimized+.maincontainerbox {
+ 	margin-left: 70px;
+ 	/* Reduce margin when sidebar is minimized */
+ }
+
+ /* side-navbar */
+ /* Sidebar Container */
+ .sidebar-container {
+ 	background-color: #f0f2f5;
+ 	position: fixed;
+ 	top: 60px;
+ 	/* Adjust according to your header height */
+ 	left: 0;
+ 	width: 230px;
+ 	height: 100%;
+ 	padding-top: 20px;
+ 	overflow-x: hidden;
+ 	transition: 0.5s;
+ 	z-index: 1;
+ }
+
+
+ .sidebar-container.minimized {
+ 	width: 70px;
+ 	/* Set the minimized width */
+ }
+
+
+ .menu-container {
+ 	list-style-type: none;
+ 	padding-top: 10px;
+ 	margin: 0;
+ 	padding: 0;
+ 	margin-top: 20px;
+ }
+
+ .menu-item {
+ 	padding: 10px 20px;
+ 	color: black;
+ 	height: 40px;
+ 	display: flex;
+ 	align-items: center;
+ }
+
+ .menu-item:hover {
+ 	background-color: rgb(221, 232, 202);
+ }
+
+ .menu-link {
+ 	text-decoration: none;
+ 	color: black;
+ }
+
+ .menu-item i {
+ 	margin-right: 10px;
+ }
+
+ .toggle-icon {
+ 	position: absolute;
+ 	top: 10px;
+ 	right: 10px;
+ 	cursor: pointer;
+ 	color: black;
+ 	font-size: 20px;
+ 	margin-left: 1;
+ }
+
+ .sidebar-container.minimized {
+ 	left: -5px !important;
+ 	/* Adding !important to ensure this rule takes precedence */
+ }
+
+
+ .menu-item.minimized .menu-link span {
+ 	display: none;
+ }
+
+ .menu-item.minimized .menu-link i {
+ 	visibility: visible;
+ }
+
+ /* CSS for active menu item */
+ .menu-item.active {
+ 	background-color: rgb(221, 232, 202);
+ 	/* Change this to the color you want */
+ 	color: #fff;
+ 	/* Text color for active menu item */
+ }
+
+ span {
+ 	text-decoration: none;
+ 	color: #333;
+ 	font-size: 18px;
+
+ }
+
+
+
+
+ /* Table */
+ .table {
+ 	margin-bottom: 20px;
+ }
+
+ .input-div {
+ 	margin-bottom: 10px;
+ 	display: flex;
+ }
+
+ .input-div input[type="text"] {
+ 	padding: 8px;
+ 	width: 70%;
+ 	border-radius: 5px;
+ 	border: 1px solid #ccc;
+ }
+
+
+ .btn {
+ 	width: 40px;
+ 	height: 40px;
+ 	background-color: skyblue;
+ 	color: white;
+ 	border: none;
+ 	border-radius: 50%;
+ 	cursor: pointer;
+ 	transition: background-color 0.3s;
+ 	display: flex;
+ 	justify-content: center;
+ 	align-items: center;
+ 	font-size: 20px;
+ }
+
+ .btn:hover {
+ 	background-color: #45a049;
+ }
+
+
+
+ .input-div button {
+ 	padding: 8px 12px;
+ 	border: none;
+ 	background-color: #007bff;
+ 	color: #fff;
+ 	border-radius: 5px;
+ 	cursor: pointer;
+ }
+
+ .input-div button:hover {
+ 	background-color: #0056b3;
+ }
+
+ /* Adjust table position based on sidebar width */
+ #dataTable {
+ 	width: calc(100% - 300px);
+ 	/* Initial width is 100% minus the sidebar width */
+ 	border-collapse: collapse;
+ 	margin-left: 240px;
+ 	/* Center the table horizontally */
+ 	margin-right: auto;
+ }
+
+ /* Adjust table heading columns */
+ .table_headings {
+ 	background-color: #f2f2f2;
+ 	padding: 10px;
+ 	text-align: left;
+ 	font-weight: bold;
+ 	border: 1px solid #ddd;
+ 	white-space: nowrap;
+ 	/* Prevent text wrapping in table headings */
+ }
+
+ #dataTable td {
+ 	padding: 10px;
+ 	border: 1px solid #ddd;
+ 	white-space: nowrap;
+ 	/* Prevent text wrapping in table cells */
+ }
+
+
+
+
+
+
+ /* Button Div */
+ .button-div {
+ 	text-align: center;
+ 	margin-top: 20px;
+ }
+
+ .backbutton {
+ 	padding: 10px 20px;
+ 	border: none;
+ 	background-color: #6c757d;
+ 	color: #fff;
+ 	border-radius: 5px;
+ 	text-decoration: none;
+ }
+
+ .backbutton:hover {
+ 	background-color: #495057;
+ }

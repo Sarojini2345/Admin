@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Employee-Allocation</title>
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+		integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link th:href="@{/css/employee_allocation.css}" rel="stylesheet">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script type="text/javascript" th:src="@{/js/employee_allocation.js}"></script>
+</head>
+
+<body>
+	
+	<div class="sidebar-container" id="sidebar">
+		<div class="toggle-icon" onclick="toggleSidebar()">
+			<i class="fas fa-bars"></i>
+		</div>
+		<ul class="menu-container" id="maincontent">
+			<li class="menu-item"><a href="/dashboard" class="menu-link">
+					<i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+			<li class="menu-item"><a href="/projectMaster" class="menu-link">
+					<i class="fas fa-project-diagram"></i><span>Project Master</span></a></li>
+			<li class="menu-item active"><a href="/hello" class="menu-link">
+					<i class="fas fa-user"></i><span>Employee Allocation</span></a></li>
+			<li class="menu-item"><a href="/benchEmp" class="menu-link">
+					<i class="fas fa-user-clock"></i><span>Bench Employees</span></a></li>
+			<li class="menu-item"><a href="/history" class="menu-link">
+					<i class="fas fa-history"></i><span>History</span></a></li>
+			<li class="menu-item"><a href="/Timesheet" class="menu-link">
+					<i class="fas fa-clock"></i><span>Timesheet</span></a></li>
+		</ul>
+	</div>
+	<div class="header">
+        <img src="https://ldtech.in/wp-content/uploads/2024/01/logo.png" alt="Logo" class="headerlogo">
+        <h3 id="header-text">Employee Allocation</h3>
+        <a href="/getHome" class="btn"><i class="fa fa-home"></i></a>
+    </div>
+    <div class="container">
+        <form id="myForm">
+            <div class="form-group">
+                <label for="employeeId">Employee Id:</label>
+                <input type="text" class="eidInput" id="employeeId" name="employeeId" required />
+            </div>
+            <div class="form-group">
+                <label for="employeeName">Employee Name:</label>
+                <input type="text" id="employeeName" name="employeeName" required />
+            </div>
+            <div class="form-group">
+                <label for="department">Department:</label>
+                <input type="text" id="department" name="department" required readonly />
+            </div>
+            <div class="form-group">
+                <label for="project">Project:</label>
+                <select id="dropdown" name="project"></select>
+            </div>
+            <div class="form-group">
+                <label for="projectAllocation">Project Allocation:</label>
+                <select id="proj" name="project_type">
+                    <option value="">Select Allocation</option>
+                    <option value="Billable">Billable</option>
+                    <option value="NonBillable">Non-Billable</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="client">Client:</label>
+                <input type="text" id="client" name="client" readonly>
+            </div>
+            <div class="form-group">
+                <label for="reportingManager">Reporting Manager:</label>
+                <input type="text" id="reportingManager" name="manager" readonly>
+            </div>
+            <div class="form-group">
+                <label for="allocationStartDate">Allocation start Date:</label>
+                <input type="date" id="allocationStartDate" name="all_startDate" >
+            </div>
+            <div class="form-group">
+                <label for="allocationEndDate">Allocation end Date:</label>
+                <input type="date" id="allocationEndDate" name="all_endDate" readonly>
+            </div>
+            <div class="button-group">
+                <button type="button" onclick="submitForm()" class="submit-button">Submit</button>
+              <button type="reset" class="back-btn">Reset</button>
+            </div>
+        </form>
+    </div>
+	<script>
+		// Fetch dropdown options from the API
+		fetch('/getDropdown')
+			.then(response => response.json())
+			.then(data => {
+				// Get the select element
+				const dropdown = document.getElementById('dropdown');
+
+				// Add a static "Select Project" option
+				const selectProjectOption = document.createElement('option');
+				selectProjectOption.value = ''; // Set the value accordingly
+				selectProjectOption.text = 'Select Project';
+				dropdown.appendChild(selectProjectOption);
+
+				// Iterate through the data and create option elements
+				data.forEach(option => {
+				
+					const optionElement = document.createElement('option');
+					optionElement.value = option.projectName;
+					optionElement.text = option.projectName;
+					
+					if (option.status === 'inactive') {
+		                optionElement.disabled = true;
+		                optionElement.classList.add('disabled-option');
+		            }
+					
+					dropdown.appendChild(optionElement);
+					
+				});
+			})
+			.catch(error => console.error('Error fetching dropdown options:', error));
+
+		function submitForm() {
+			// Get form values
+			var employeeId = $('#employeeId').val();
+			var employeeName = $('#employeeName').val();
+			var department = $('#department').val();
+			var selectedProjectName = $('#dropdown').val(); // Assuming this returns the selected project name
+
+			// Check if selectedProjectName is not null
+			if (selectedProjectName == null || selectedProjectName === '') {
+				// Handle case where no project is selected
+				alert("Please select a project.");
+				return;
+			}
+
+			var projectAllocation = $('#proj').val();
+			var client = $('#client').val();
+			var manager = $('#reportingManager').val();
+			var startdate = $('#allocationStartDate').val();
+			var enddate = $('#allocationEndDate').val();
+
+			// Construct JSON object
+			var jsonData = {
+				"employeeId": employeeId,
+				"employeeName": employeeName,
+				"department": department,
+				"status": "active", // Set status to "active" as per your provided structure
+				"project": [{
+					"project_name": selectedProjectName, // Pass the project name as project_name
+					"project_type": projectAllocation,
+					"client": client,
+					"manager": manager,
+					
+					// Add other project-related fields here
+				}],
+			    "allDate":[{
+			    	"all_startDate": startdate,
+					"all_endDate": enddate,
+					"eid":employeeId
+			    }]
+			};
+
+			// Log the constructed JSON object
+			console.log("json " + jsonData);
+
+			// Send the JSON data to the server using AJAX
+			$.ajax({
+				type: 'POST',
+				url: '/insertData/' + selectedProjectName, // Pass selectedProjectName as a path variable
+				contentType: 'application/json',
+				data: JSON.stringify(jsonData),
+				success: function (data) {
+					var str="This employee is already associated with a project do you want to deallocate ?";
+					if(data===str){
+					var modal = `
+			            <div id="custom-modal" style="display: block; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
+			                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background-color: white; padding: 20px; border-radius: 5px;">
+			                    <p>${data}</p>
+			                    <button id="deallocate-btn" style="background-color:red;color:white">Deallocate</button>
+			                    <button id="cancel-btn" style="background-color:green;color:white">Cancel</button>
+			                </div>
+			            </div>
+			        `;
+			        // Append the modal to the body
+			        $('body').append(modal);
+			        
+			        // Add click event listener to the Deallocate button
+			        $('#deallocate-btn').on('click', function() {
+			            // Handle deallocate action if needed
+			            // Then, close the modal
+			            confirm("Are you sure");
+			            var employeeId=$("#employeeId").val();
+			            console.log(employeeId);
+						$.ajax({
+							url: '/deallocate/' + employeeId, // Use the correct endpoint
+							type: 'POST',
+							success: function(data) {
+								alert(data);
+							},
+							error: function() {
+								toastr.error("Error fetching employee data");
+							}
+						});
+			            $('#custom-modal').remove();
+			        });
+			        
+			        // Add click event listener to the Cancel button
+			        $('#cancel-btn').on('click', function() {
+			            // Close the modal
+			            $('#custom-modal').remove();
+			        });
+			        
+					}
+					else{
+						alert(data);
+					}
+					// Handle success if needed
+				},
+				error: function (error) {
+					console.error('Error:', error);
+					alert("Error occurred while submitting the form.");
+					// Handle error if needed
+				}
+			});
+		}
+	</script>
+</body>
+</html>
